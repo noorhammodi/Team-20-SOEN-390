@@ -1,0 +1,2 @@
+# SOEN-390
+COVID App for SOEN-390

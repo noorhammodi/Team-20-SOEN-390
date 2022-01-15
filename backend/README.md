@@ -47,7 +47,7 @@ Instructions to run the server using Docker
   ```
 </details>
 <details>
-  <summary> Using the Dockerfile directly </summary>
+  <summary>Using the Dockerfile directly</summary>
   In this section, you will find commands for the Dockerfile.
 
   ### Building the image:

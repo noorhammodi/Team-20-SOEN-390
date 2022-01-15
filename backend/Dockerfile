@@ -18,7 +18,4 @@ COPY . ./
 ENV PORT 3001
 EXPOSE $PORT
 
-CMD ["node", "index.js"]
-
-
-
+CMD ["node", "./bin/www"]

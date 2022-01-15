@@ -5,15 +5,20 @@ WORKDIR /app
 # Copy just package.json
 COPY package.json /app
 
-RUN npm install
+# Install the packages
+ARG NODE_ENV
+RUN if [ "$NODE_ENV" = "development" ]; \
+    then npm install; \
+    else npm install --only=production; \
+  fi
 
 # Copy over the rest of the files
-COPY . /app/
+COPY . ./ 
 
-# PORT
-EXPOSE 3001
+ENV PORT 3001
+EXPOSE $PORT
 
-CMD ["npm","run", "dev"]
+CMD ["node", "index.js"]
 
 
 

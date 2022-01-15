@@ -30,8 +30,13 @@ Instructions to run the server using Docker
 
   ### Take down the container:
   The `-v` flag erases the container storage
+  Development image
   ```
-  docker-compose down -v
+  docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v
+  ```
+  Production image
+  ```
+  docker-compose -f docker-compose.yml -f docker-compose.prod.yml down -v
   ```
 
   ### Access container terminal:

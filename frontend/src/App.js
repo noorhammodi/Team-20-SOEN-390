@@ -22,4 +22,8 @@ function App() {
   );
 }
 
+fetch('http://localhost:3001/users')
+  .then(response => response.text())
+  .then(data => console.log({data}));
+
 export default App;

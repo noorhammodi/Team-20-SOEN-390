@@ -24,7 +24,9 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
 
 <details>
   <summary>Extra helpful commands</summary>
+  
   Double check that containers are running (`-al` flag can be useful)
+  
   ```
   docker ps
   ```

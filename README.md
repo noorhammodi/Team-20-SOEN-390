@@ -5,7 +5,7 @@ COVID App for SOEN-390
 
 You will need to install `docker` and `docker-compose`
 
-Build the development environment with this command. It works on this directory and on /backend/ and /frontend/ if you wanted to do them individually.
+Build the development environment with this command. It works on this directory and on `./backend/` and `./frontend/` if you wanted to run them individually.
 ```
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 ```

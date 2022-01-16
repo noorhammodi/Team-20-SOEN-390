@@ -22,15 +22,15 @@ or
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
 ```
 
-Double check that containers are running (`-al` flag can be useful)
-```
-docker ps
-```
+<details>
+  <summary>Extra helpful commands</summary>
+  Double check that containers are running (`-al` flag can be useful)
+  ```
+  docker ps
+  ```
 
-
-
-
-Enter a container's terminal
-```
-docker exec -it <container_name> /bin/sh
-```
+  Enter a container's terminal
+  ```
+  docker exec -it <container_name> /bin/sh
+  ```
+</details>

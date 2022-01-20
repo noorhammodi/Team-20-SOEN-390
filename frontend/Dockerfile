@@ -2,6 +2,12 @@ FROM node:17-alpine3.14
 
 WORKDIR /app
 
+# Give user "app" permissions
+RUN addgroup app && adduser -S -G app app && chown -R app /app
+
+# Switch to user "app"
+USER app
+
 # Copy just package.json
 COPY package.json /app
 

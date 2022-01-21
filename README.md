@@ -35,4 +35,27 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
   ```
   docker exec -it <container_name> /bin/sh
   ```
+
+  Image pruning
+  ```
+  docker image prune
+  ```
+
+  Volume pruning
+  ```
+  docker volume prune
+  ```
 </details>
+
+Then from there you can access
+
+Frontend
+```
+localhost:3000
+```
+Backend
+```
+localhost:3001
+```
+
+

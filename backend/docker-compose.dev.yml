@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  express-app:
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+    volumes:
+     - ./:/app
+     - backend-node:/app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+
+volumes:
+  backend-node:

@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   express-app:
+    
     build:
       context: .
       args:
@@ -9,8 +10,16 @@ services:
      - ./:/app
      - backend-node:/app/node_modules
     environment:
-      - NODE_ENV=development
+      MONGODB_URI: mongodb://mongo_db
+      NODE_ENV: development
     command: npm run dev
+  # mongo_db:
+  #   container_name: mongo_db
+  #   image: mongo:4.4.6
+  #   volumes: 
+  #     - mongo_db:/data/db
+    
 
 volumes:
-  backend-node:
+  backend-node: 
+  # mongo_db:

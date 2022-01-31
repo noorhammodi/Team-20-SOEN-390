@@ -1,38 +1,22 @@
-import express from 'express';
-
-//import database from './routes/index.js';
-
-import router from './routes/index.js';
-
-const app = express();
-
+var express = require('express');
 var cors = require('cors');
-
 var path = require('path');
-
 var cookieParser = require('cookie-parser');
-
 var logger = require('morgan');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
-app.use((_, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-});
+var app = express();
 
 app.use(cors());
 app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(router);
-
-//TODO sequelize for mongo?
-
-app.listen(5000)
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
 module.exports = app;

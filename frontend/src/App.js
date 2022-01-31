@@ -2,9 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { LoginScreen } from './views';
+import { LoginScreen } from './views/LoginScreen';
 
-export default function App() {
+function App() {
   return (
     <View style={styles.container}>
       <LoginScreen />
@@ -26,3 +26,4 @@ fetch('http://localhost:3001/users')
   .then(response => response.text())
   .then(data => console.log({data}));
 
+export default App;

@@ -7,12 +7,15 @@ const API_URL = 'https://covid-tracking-backend.herokuapp.com';
 const LoginScreen = () => {
 
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [hin, setHIN] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [role, setRole] = useState('');
 
     const [isError, setIsError] = useState(false);
     const [message, setMessage] = useState('');
-    const [isLogin, setIsLogin] = useState(true);
+    const [isLogin, setIsLogin] = useState(false);
 
     const onChange = () => {
         setIsLogin(!isLogin);
@@ -43,8 +46,11 @@ const LoginScreen = () => {
     const onSubmit = () => {
         const payload = {
             email,
-            name,
+            firstName,
+            lastName,
+            hin,
             password,
+            role,
         };
         fetch(`${API_URL}/${isLogin ? 'rest/api/login' : 'rest/api/add-user'}`, {
             method: 'POST',
@@ -56,7 +62,6 @@ const LoginScreen = () => {
             try {
                 const jsonResponse = await response.json();
                 if (response.status !== 200) {
-                    console.log("Here")
                     setIsError(true);
                     setMessage(jsonResponse.message);
                 } else {
@@ -84,8 +89,11 @@ const LoginScreen = () => {
                 <View style={styles.form}>
                     <View style={styles.inputs}>
                         <TextInput style={styles.input} placeholder="Email" autoCapitalize="none" onChangeText={setEmail}></TextInput>
-                        {!isLogin && <TextInput style={styles.input} placeholder="Name" onChangeText={setName}></TextInput>}
+                        {!isLogin && <TextInput style={styles.input} placeholder="First Name" onChangeText={setFirstName}></TextInput>}
+                        {!isLogin && <TextInput style={styles.input} placeholder="Last Name" onChangeText={setLastName}></TextInput>}
                         <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" onChangeText={setPassword}></TextInput>
+                        {!isLogin && <TextInput style={styles.input} placeholder="Health Insurance Number" onChangeText={setHIN}></TextInput>}
+                        {!isLogin && <TextInput style={styles.input} placeholder="Role" onChangeText={setRole}></TextInput>}
                         <Text style={[styles.message, {color: isError ? 'red' : 'green'}]}>{message ? getMessage() : null}</Text>
                         <TouchableOpacity style={styles.button} onPress={onSubmit}>
                             <Text style={styles.buttonText}>Submit</Text>

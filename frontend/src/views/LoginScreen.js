@@ -46,10 +46,6 @@ const LoginScreen = () => {
             else {
                 setIsError(false);
                 const jsonResponse = response[0];
-
-                if (isLogin) {
-                    const receivedFirstName = JSON.stringify(jsonResponse.firstName);
-                    setMessage(`Welcome, ${receivedFirstName}.`);
                 }
                 else {
                     setMessage(`Thank you for registering.`);

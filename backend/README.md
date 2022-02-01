@@ -2,7 +2,7 @@
 
 ## Info 
 
-  PORT = 5000
+  PORT = 3001
 
 ## Docker
 
@@ -57,7 +57,7 @@ Instructions to run the server using Docker
 
   ### Running a container from image:
   ```
-  docker run -v /app/node_modules -v $(pwd):/app -p 5000:5000 -d --name backend-app backend-image
+  docker run -v /app/node_modules -v $(pwd):/app -p 3001:3001 -d --name backend-app backend-image
   ```
 
   ### Killing the container:

@@ -3,6 +3,6 @@ services:
   express-app:
     build: .
     ports:
-      - "5000:5000"
+      - "3001:3001"
     environment:
-      - PORT=5000
+      - PORT=3001

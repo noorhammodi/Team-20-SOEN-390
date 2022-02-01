@@ -92,14 +92,13 @@ router.get('/rest/api/users', function (req, res) {
 
 
 router.post('/rest/api/login', function (req, res) {
-
-    if(req.body.email==null&&req.body.password==null){
+    if(req.body.email==null || req.body.password==null){
     res.send("error: field missing")
         
     }
 else{
   return_query_load(function(result) {
-    console.log(result)
+
   
    
     if(result[0].password == req.body.password){

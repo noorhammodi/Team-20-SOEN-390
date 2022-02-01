@@ -13,5 +13,5 @@ workflows:
     example-workflow:
       jobs:
         - node/test:
-            app-dir: ~/frontend 
+            app-dir: C:\Users\Jacob\projects\SOEN-390-Org\Team-20-SOEN-390\frontend 
             run-command: npm start

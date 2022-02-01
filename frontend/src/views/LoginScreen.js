@@ -60,14 +60,13 @@ const LoginScreen = () => {
         }).then(async response => {
             try {
                 const jsonResponse = await response.json();
-                console.log("JSON response: " + JSON.stringify(jsonResponse[0].email))
                 if (response.status !== 200) {
                     setIsError(true);
                     setMessage(jsonResponse.message);
                 } else {
                     //onLogin(jsonResponse.token);
                     setIsError(false);
-                    setMessage(JSON.stringify(jsonResponse[0].email));
+                    setMessage("Welcome " + JSON.stringify(jsonResponse[0].email) + "!\nYour role is " + JSON.stringify(jsonResponse[0].role));
                 }
             } catch (e) {
                 console.log(e);

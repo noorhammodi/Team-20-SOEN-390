@@ -8,13 +8,13 @@ const instance = axios.create({
 const addUser = 'rest/api/add-user'
 const logUser = 'rest/api/login'
 
-const register = async credentials => {
-  const response = await instance.post(addUser, credentials)
+const register = async payload => {
+  const response = await instance.post(addUser, payload)
   return response.data
 }
 
-const login = async credentials => {
-  const response = await instance.post(logUser, credentials)
+const login = async payload => {
+  const response = await instance.post(logUser, payload)
   return response.data
 }
 

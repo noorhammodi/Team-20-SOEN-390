@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-// setup axios
+// setup axios, just use axios instead of instance if frontend is on the same domain, otherwise modify the baseURL.
 const instance = axios.create({
   baseURL: 'http://localhost:5000'
 })
@@ -18,6 +18,7 @@ const login = async payload => {
   return response.data
 }
 
+// For export
 const loginService = {
   register,
   login,

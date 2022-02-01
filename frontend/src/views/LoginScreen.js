@@ -33,14 +33,21 @@ const LoginScreen = () => {
                 hin,
                 password,
                 role,
-            }
-            const response = isLogin ? await loginService.login(payload) : await loginService.register(payload)
+            };
+            const response = isLogin ? await loginService.login(payload) : await loginService.register(payload);
             
-            const receivedFirstName = JSON.stringify(response[0].firstName)
+            const jsonResponse = response[0];
+            const receivedFirstName = JSON.stringify(jsonResponse.firstName)
             
-            console.log(receivedFirstName)
+            console.log(receivedFirstName);
             setIsError(false);
-            setMessage(`Welcome, ${receivedFirstName}.`)
+            
+            if(isLogin) {
+                setMessage(`Welcome, ${receivedFirstName}.`);
+            }
+            else {
+                setMessage(`Thank you for registering.`);
+            }
 
         } catch (exception) {
             setIsError(true);

@@ -2,43 +2,39 @@ const mongoose = require("mongoose");
 
 const channelSchema= new mongoose.Schema({
 
-        email: {
+    username: {
         type: String,
         required: true,
         trim: true,
         unique: true
-        },
+    },
 
-        hin: {
+    hin: {
         type: String,
         required: true,
         trim: true,
         unique: true
-        },
+            },
 
-        password: {
+    password: {
             type: String,
             required: true,
             trim: true,
-        },
+            },
     
-        firstName:{
+    firstName:{
             type: String,
             required: true,
             trim: true,        
-        },
+            },
+             
+    lastName:{
+            type: String,
+            required: true,
+            trim: true,
+            }
 
-        lastName:{
-                type: String,
-                required: true,
-                trim: true,
-        },
 
-        role:{
-                type: String,
-                required: true,
-                trim: true,
-        }
 })
 
 

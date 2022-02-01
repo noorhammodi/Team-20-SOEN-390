@@ -16,6 +16,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - node/install-packages:
+          app-dir: ~/frontend
 workflows:
   example-workflow:
     jobs:

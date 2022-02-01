@@ -35,31 +35,41 @@ const LoginScreen = () => {
                 password,
                 role,
             };
+
+            // Get response from axios
             const response = isLogin ? await loginService.login(payload) : await loginService.register(payload);
-            
-            const jsonResponse = response[0];
-            const receivedFirstName = JSON.stringify(jsonResponse.firstName)
-            
-            // console.log(receivedFirstName);
-            setIsError(false);
-            
-            if(isLogin) {
-                setMessage(`Welcome, ${receivedFirstName}.`);
+
+            // Defining the process for response
+            const processResponse = (res) => {
+                if (res.includes('error') || res.includes('Error')) {
+                    setIsError(true);
+                    setMessage(res);
+                }
+                else {
+                    setIsError(false);
+                    const jsonResponse = res[0];
+
+                    if (isLogin) {
+                        const receivedFirstName = JSON.stringify(jsonResponse.firstName);
+                        setMessage(`Welcome, ${receivedFirstName}.`);
+                    }
+                    else {
+                        setMessage(`Thank you for registering.`);
+                    }
+                }
             }
-            else {
-                setMessage(`Thank you for registering.`);
-            }
+            
+            // Process the response
+            processResponse(await response);
 
         } catch (exception) {
             setIsError(true);
             setMessage(exception);
         }
-
     }
 
     const getMessage = () => {
-        const status = isError ? `Error: ` : `Success: `;
-        return status + message;
+        return message;
     }
 
     return (
@@ -74,14 +84,14 @@ const LoginScreen = () => {
                         <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" onChangeText={setPassword}></TextInput>
                         {!isLogin && <TextInput style={styles.input} placeholder="Health Insurance Number" onChangeText={setHIN}></TextInput>}
                         {!isLogin && <TextInput style={styles.input} placeholder="Role" onChangeText={setRole}></TextInput>}
-                        <Text style={[styles.message, {color: isError ? 'red' : 'green'}]}>{message ? getMessage() : null}</Text>
+                        <Text style={[styles.message, { color: isError ? 'red' : 'green' }]}>{message ? getMessage() : null}</Text>
                         <TouchableOpacity style={styles.button} onPress={onSubmit}>
                             <Text style={styles.buttonText}>Submit</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonAlt} onPress={onChange}>
                             <Text style={styles.buttonAltText}>{isLogin ? 'Sign Up' : 'Log In'}</Text>
                         </TouchableOpacity>
-                    </View>    
+                    </View>
                 </View>
             </View>
         </ImageBackground>
@@ -94,7 +104,7 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         paddingBottom: '10%',
-    },  
+    },
     card: {
         flex: 1,
         backgroundColor: 'rgba(255, 255, 255, 0.4)',
@@ -121,13 +131,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: '10%',
-    },  
+    },
     input: {
         width: '80%',
         borderBottomWidth: 1,
         borderBottomColor: 'black',
         paddingLeft: '1%',
-        fontSize: 16, 
+        fontSize: 16,
         minHeight: 40,
         borderRadius: 5,
     },

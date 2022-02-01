@@ -15,7 +15,7 @@ RUN if [ "$NODE_ENV" = "development" ]; \
 # Copy over the rest of the files
 COPY . ./ 
 
-ENV PORT 3001
+ENV PORT 5000 
 EXPOSE $PORT
 
 CMD ["node", "./bin/www"]

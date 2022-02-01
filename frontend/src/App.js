@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
 });
 
-fetch('http://localhost:3001/users')
+fetch('http://localhost:5000/users')
   .then(response => response.text())
   .then(data => console.log({data}));
 

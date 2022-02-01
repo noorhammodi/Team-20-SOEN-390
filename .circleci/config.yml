@@ -12,4 +12,5 @@ orbs:
 workflows:
     example-workflow:
       jobs:
-        - node/test
+        - node/test:
+            app-dir: /frontend 

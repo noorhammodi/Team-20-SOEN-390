@@ -46,15 +46,15 @@ const LoginScreen = () => {
             else {
                 setIsError(false);
                 const jsonResponse = response[0];
-                }
-                else {
+                if (isLogin)
+                    setMessage("Welcome " + jsonResponse.firstName + "!\nYour role is " + jsonResponse.role);
+                else
                     setMessage(`Thank you for registering.`);
                 }
             }
-
-        } catch (exception) {
-            setIsError(true);
-            setMessage(exception);
+            catch (exception) {
+                setIsError(true);
+                setMessage(exception);
         }
     }
 

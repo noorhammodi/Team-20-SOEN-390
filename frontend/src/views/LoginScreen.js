@@ -24,6 +24,7 @@ const LoginScreen = () => {
     }
 
     const onSubmit = async (event) => {
+        // for <form>s
         event.preventDefault()
         try {
             const payload = {
@@ -39,7 +40,7 @@ const LoginScreen = () => {
             const jsonResponse = response[0];
             const receivedFirstName = JSON.stringify(jsonResponse.firstName)
             
-            console.log(receivedFirstName);
+            // console.log(receivedFirstName);
             setIsError(false);
             
             if(isLogin) {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ImageBackground, View, Text, StyleSheet, TouchableOpacity, TextInput, Platform } from 'react-native';
+import loginService from '../services/login'
 
 // const API_URL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2:3000'; // TODO figure out what port
 const API_URL = 'http://localhost:5000';
@@ -22,63 +23,43 @@ const LoginScreen = () => {
         setMessage('');
     }
 
-    const onLogin = token => {
-        fetch(`${API_URL}/`, {  //TODO
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then(async response => {
-            try {
-                const jsonResponse = await response.json();
-                if (response.status === 200) {
-                    setMessage(jsonResponse.message);
-                }
-            } catch (e) {
-                console.log(e);
+    const onSubmit = async (event) => {
+        // for <form>s
+        event.preventDefault()
+        try {
+            const payload = {
+                email,
+                firstName,
+                lastName,
+                hin,
+                password,
+                role,
+            };
+
+            // Get response from axios
+            const response = isLogin ? await loginService.login(payload) : await loginService.register(payload);
+
+            if (response.includes('error') || response.includes('Error')) {
+                setIsError(true);
+                setMessage(response);
             }
-        }).catch(e => {
-            console.log(e);
-        });
+            else {
+                setIsError(false);
+                const jsonResponse = response[0];
+                }
+                else {
+                    setMessage(`Thank you for registering.`);
+                }
+            }
+
+        } catch (exception) {
+            setIsError(true);
+            setMessage(exception);
+        }
     }
 
-    const onSubmit = () => {
-        const payload = {
-            email,
-            firstName,
-            lastName,
-            hin,
-            password,
-            role,
-        };
-        fetch(`${API_URL}/${isLogin ? 'rest/api/login' : 'rest/api/add-user'}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-        }).then(async response => {
-            try {
-                const jsonResponse = await response.json();
-                if (response.status !== 200) {
-                    setIsError(true);
-                    setMessage(jsonResponse.message);
-                } else {
-                    //onLogin(jsonResponse.token);
-                    setIsError(false);
-                    setMessage("Welcome " + JSON.stringify(jsonResponse[0].email) + "!\nYour role is " + JSON.stringify(jsonResponse[0].role));
-                }
-            } catch (e) {
-                console.log(e);
-            };
-        }).catch(e => {
-            console.log(e);
-        });
-    };
-
     const getMessage = () => {
-        const status = isError ? `Error: ` : `Success: `;
-        return status + message;
+        return message;
     }
 
     return (
@@ -93,14 +74,14 @@ const LoginScreen = () => {
                         <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" onChangeText={setPassword}></TextInput>
                         {!isLogin && <TextInput style={styles.input} placeholder="Health Insurance Number" onChangeText={setHIN}></TextInput>}
                         {!isLogin && <TextInput style={styles.input} placeholder="Role" onChangeText={setRole}></TextInput>}
-                        <Text style={[styles.message, {color: isError ? 'red' : 'green'}]}>{message ? getMessage() : null}</Text>
+                        <Text style={[styles.message, { color: isError ? 'red' : 'green' }]}>{message ? getMessage() : null}</Text>
                         <TouchableOpacity style={styles.button} onPress={onSubmit}>
                             <Text style={styles.buttonText}>Submit</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonAlt} onPress={onChange}>
                             <Text style={styles.buttonAltText}>{isLogin ? 'Sign Up' : 'Log In'}</Text>
                         </TouchableOpacity>
-                    </View>    
+                    </View>
                 </View>
             </View>
         </ImageBackground>
@@ -113,7 +94,7 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         paddingBottom: '10%',
-    },  
+    },
     card: {
         flex: 1,
         backgroundColor: 'rgba(255, 255, 255, 0.4)',
@@ -140,13 +121,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: '10%',
-    },  
+    },
     input: {
         width: '80%',
         borderBottomWidth: 1,
         borderBottomColor: 'black',
         paddingLeft: '1%',
-        fontSize: 16, 
+        fontSize: 16,
         minHeight: 40,
         borderRadius: 5,
     },

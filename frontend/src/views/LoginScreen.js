@@ -24,7 +24,7 @@ const LoginScreen = () => {
 
     const onLogin = token => {
         fetch(`${API_URL}/`, {  //TODO
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -60,14 +60,14 @@ const LoginScreen = () => {
         }).then(async response => {
             try {
                 const jsonResponse = await response.json();
-                console.log("response: " + response);
+                console.log("JSON response: " + JSON.stringify(jsonResponse[0].email))
                 if (response.status !== 200) {
                     setIsError(true);
                     setMessage(jsonResponse.message);
                 } else {
-                    onLogin(jsonResponse.token);
+                    //onLogin(jsonResponse.token);
                     setIsError(false);
-                    setMessage(jsonResponse.message);
+                    setMessage(JSON.stringify(jsonResponse[0].email));
                 }
             } catch (e) {
                 console.log(e);
@@ -78,7 +78,7 @@ const LoginScreen = () => {
     };
 
     const getMessage = () => {
-        const status = isError ? `Error: ` : `Succuess: `;
+        const status = isError ? `Error: ` : `Success: `;
         return status + message;
     }
 
@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
     },
     message: {
         fontSize: 16,
-        marginVertical: '5%',
     },
 })
 

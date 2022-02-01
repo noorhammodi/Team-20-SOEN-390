@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ImageBackground, View, Text, StyleSheet, TouchableOpacity, TextInput, Platform } from 'react-native';
+import loginService from '../services/login'
 
 // const API_URL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2:3000'; // TODO figure out what port
 const API_URL = 'http://localhost:5000';
@@ -22,60 +23,31 @@ const LoginScreen = () => {
         setMessage('');
     }
 
-    const onLogin = token => {
-        fetch(`${API_URL}/`, {  //TODO
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then(async response => {
-            try {
-                const jsonResponse = await response.json();
-                if (response.status === 200) {
-                    setMessage(jsonResponse.message);
-                }
-            } catch (e) {
-                console.log(e);
+    const onSubmit = async (event) => {
+        event.preventDefault()
+        try {
+            const payload = {
+                email,
+                firstName,
+                lastName,
+                hin,
+                password,
+                role,
             }
-        }).catch(e => {
-            console.log(e);
-        });
-    }
+            const response = isLogin ? await loginService.login(payload) : await loginService.register(payload)
+            
+            const receivedFirstName = JSON.stringify(response[0].firstName)
+            
+            console.log(receivedFirstName)
+            setIsError(false);
+            setMessage(`Welcome, ${receivedFirstName}.`)
 
-    const onSubmit = () => {
-        const payload = {
-            email,
-            firstName,
-            lastName,
-            hin,
-            password,
-            role,
-        };
-        fetch(`${API_URL}/${isLogin ? 'rest/api/login' : 'rest/api/add-user'}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-        }).then(async response => {
-            try {
-                const jsonResponse = await response.json();
-                console.log("JSON response: " + JSON.stringify(jsonResponse[0].email))
-                if (response.status !== 200) {
-                    setIsError(true);
-                    setMessage(jsonResponse.message);
-                } else {
-                    //onLogin(jsonResponse.token);
-                    setIsError(false);
-                    setMessage(JSON.stringify(jsonResponse[0].email));
-                }
-            } catch (e) {
-                console.log(e);
-            };
-        }).catch(e => {
-            console.log(e);
-        });
-    };
+        } catch (exception) {
+            setIsError(true);
+            setMessage(exception);
+        }
+
+    }
 
     const getMessage = () => {
         const status = isError ? `Error: ` : `Success: `;

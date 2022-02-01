@@ -39,28 +39,22 @@ const LoginScreen = () => {
             // Get response from axios
             const response = isLogin ? await loginService.login(payload) : await loginService.register(payload);
 
-            // Defining the process for response
-            const processResponse = (res) => {
-                if (res.includes('error') || res.includes('Error')) {
-                    setIsError(true);
-                    setMessage(res);
+            if (response.includes('error') || response.includes('Error')) {
+                setIsError(true);
+                setMessage(response);
+            }
+            else {
+                setIsError(false);
+                const jsonResponse = response[0];
+
+                if (isLogin) {
+                    const receivedFirstName = JSON.stringify(jsonResponse.firstName);
+                    setMessage(`Welcome, ${receivedFirstName}.`);
                 }
                 else {
-                    setIsError(false);
-                    const jsonResponse = res[0];
-
-                    if (isLogin) {
-                        const receivedFirstName = JSON.stringify(jsonResponse.firstName);
-                        setMessage(`Welcome, ${receivedFirstName}.`);
-                    }
-                    else {
-                        setMessage(`Thank you for registering.`);
-                    }
+                    setMessage(`Thank you for registering.`);
                 }
             }
-            
-            // Process the response
-            processResponse(await response);
 
         } catch (exception) {
             setIsError(true);

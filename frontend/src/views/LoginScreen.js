@@ -23,15 +23,15 @@ const LoginScreen = () => {
     }
 
     const onLogin = token => {
-        fetch(`${API_URL}/private`, {  //TODO
-            method: 'GET',
+        fetch(`${API_URL}/rest/api/login`, {  //TODO
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
             },
         }).then(async response => {
             try {
                 const jsonResponse = await response.json();
+                console.log(jsonResponse)
                 if (response.status === 200) {
                     setMessage(jsonResponse.message);
                 }
@@ -95,7 +95,7 @@ const LoginScreen = () => {
                         {!isLogin && <TextInput style={styles.input} placeholder="Health Insurance Number" onChangeText={setHIN}></TextInput>}
                         {!isLogin && <TextInput style={styles.input} placeholder="Role" onChangeText={setRole}></TextInput>}
                         <Text style={[styles.message, {color: isError ? 'red' : 'green'}]}>{message ? getMessage() : null}</Text>
-                        <TouchableOpacity style={styles.button} onPress={onSubmit}>
+                        <TouchableOpacity style={styles.button} onPress={isLogin ? onLogin : onSubmit}>
                             <Text style={styles.buttonText}>Submit</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonAlt} onPress={onChange}>

@@ -5,7 +5,7 @@ const ChannelModel = require("../models/model")
 const path = require('path');
 var MongoClient = require('mongodb').MongoClient;
 // var url = "mongodb://mongo_db";
-var dbName = "myFirstDB"
+var dbName = "test1"
 var url=`mongodb+srv://soenapp390:asdzxc@cluster0.efezn.mongodb.net/${dbName}?retryWrites=true&w=majority`
 
 const connectionParams={
@@ -18,7 +18,7 @@ useUnifiedTopology:true
 
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
-  var dbo = db.db("myFirstDB");
+  var dbo = db.db(dbName);
   
   dbo.collection("channels").find().toArray(function(err, result) {
     if (err) throw err;
@@ -55,30 +55,29 @@ router.post('/rest/api/add-user', function (req, res) {
   var lastName=req.body.lastName
 
   if(hin==null||firstName==null||email==null||password==null||lastName==null||role==null){
-     res.send("error: missing fields")
+      res.send("error: missing fields")
   }
   else {
-    var payload= new ChannelModel()
-payload.firstName=firstName
-payload.email=email
-payload.hin=hin
-payload.password=password
-payload.role=role
-payload.lastName=lastName
+      var payload= new ChannelModel()
+      payload.firstName=firstName
+      payload.email=email
+      payload.hin=hin
+      payload.password=password
+      payload.role=role
+      payload.lastName=lastName
 
-payload.save((err,data)=>{
-if(err){
-  console.log(err)
-  res.send("error: username or health insurance number already taken ")
-}
-else{
-  res.send("perfect: form sent")
-console.log(data)
+      payload.save((err,data)=>{
+        if(err){
+          console.log(err)
+          res.send("error: email or health insurance number already taken ")
+        }
+        else{
+          res.send("perfect: form sent")
+          console.log(data)
+        }
 
-}
 
-
-}) }
+})}
 
  });
 
@@ -100,7 +99,7 @@ router.post('/rest/api/login', function (req, res) {
     }
 else{
   return_query_load(function(result) {
-    
+    console.log(result)
   
    
     if(result[0].password == req.body.password){
@@ -136,7 +135,7 @@ router.get('/', function(req, res, next) {
  function  return_query(my_callback) {
   MongoClient.connect(url, function(err, db) {
       if (err) throw  err;
-      var  db_var = db.db("myFirstDB");
+      var  db_var = db.db(dbName);
       db_var.collection("channels").find().toArray(function(err, result) {
           if (err) throw  err;
           console.log(result);
@@ -150,8 +149,8 @@ router.get('/', function(req, res, next) {
  function  return_query_load(my_callback, load) {
   MongoClient.connect(url, function(err, db) {
       if (err) throw  err;
-      var  db_var = db.db("myFirstDB");
-      db_var.collection("channels").find({username:load}).toArray(function(err, result) {
+      var  db_var = db.db(dbName);
+      db_var.collection("channels").find({email:load}).toArray(function(err, result) {
           if (err) throw  err;
           console.log(result);
          

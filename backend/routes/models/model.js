@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 
 const channelSchema= new mongoose.Schema({
 
-    email:{
-        type: String,
-        required: true,
-        trim: true,
-        unique: true
+    username: {
+    type: String,
+    required: true,
+    trim: true,
+    unique: true
+
     },
 
     hin:{
@@ -14,32 +15,35 @@ const channelSchema= new mongoose.Schema({
         required: true,
         trim: true,
         unique: true
-    },
+    
+        },
+
 
     password: {
-        type: String,
-        required: true,
-        trim: true,
-    },
+            type: String,
+            required: true,
+            trim: true,
+        
+            },
     
-    firstName:{
-        type: String,
-        required: true,
-        trim: true,       
-    },
+    
 
-    lastName:{
-        type: String,
-        required: true,
-        trim: true,       
-    },
+ firstName:{
+                    type: String,
+                    required: true,
+                    trim: true,
+                  
+                
+            },
+             lastName:{
+                        type: String,
+                        required: true,
+                        trim: true,
+                       
+                    
+                        }
 
-    role:{
-        type: String,
-        required: true,
-        trim: true,
-        unique: true
-    }
+
 })
 
 

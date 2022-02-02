@@ -3,9 +3,6 @@ import { ImageBackground, View, Text, StyleSheet, TouchableOpacity, TextInput } 
 import { useNavigate, useLocation } from 'react-router-dom';
 import loginService from '../services/login'
 
-// const API_URL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2:3000'; // TODO figure out what port
-//const API_URL = 'http://localhost:5000';
-
 const LoginScreen = () => {
     let navigate = useNavigate();
     const location = useLocation();

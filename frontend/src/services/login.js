@@ -5,7 +5,7 @@ const devAxios = axios.create({
 });
 
 const prodAxios = axios.create({
-  baseURL: 'https://covid-tracking-backend.herokuapp.com'
+  baseURL: 'http://ec2-15-223-77-239.ca-central-1.compute.amazonaws.com:3001'
 });
 
 // TODO: dynamic switch depending if dev or prod

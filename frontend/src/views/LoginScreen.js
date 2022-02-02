@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { ImageBackground, View, Text, StyleSheet, TouchableOpacity, TextInput, Platform } from 'react-native';
+import { ImageBackground, View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { useNavigate, useLocation } from 'react-router-dom';
 import loginService from '../services/login'
 
 const LoginScreen = () => {
-
+    let navigate = useNavigate();
+    const location = useLocation();
+    const initialLogin = location.state?.isLogin ? true : false;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hin, setHIN] = useState('');
@@ -13,7 +16,7 @@ const LoginScreen = () => {
 
     const [isError, setIsError] = useState(false);
     const [message, setMessage] = useState('');
-    const [isLogin, setIsLogin] = useState(false);
+    const [isLogin, setIsLogin] = useState(initialLogin);
 
     const onChange = () => {
         setIsLogin(!isLogin);
@@ -35,7 +38,6 @@ const LoginScreen = () => {
 
             // Get response from axios
             const response = isLogin ? await loginService.login(payload) : await loginService.register(payload);
-
             if (response.includes('error') || response.includes('Error')) {
                 setIsError(true);
                 setMessage(response);
@@ -43,15 +45,21 @@ const LoginScreen = () => {
             else {
                 setIsError(false);
                 const jsonResponse = response[0];
-                if (isLogin)
-                    setMessage("Welcome " + jsonResponse.firstName + "!\nYour role is " + jsonResponse.role);
-                else
+                if (isLogin){
+                    //setMessage("Welcome " + jsonResponse.firstName + "!\nYour role is " + jsonResponse.role);
+                    navigate("/dashboard", { state: {name: jsonResponse.firstName, role: jsonResponse.role} });
+                }
+                    
+                else{
+                    alert(`Thank you for registering.`);
                     setMessage(`Thank you for registering.`);
+                    setIsLogin(true);
                 }
             }
-            catch (exception) {
-                setIsError(true);
-                setMessage(exception);
+        }
+        catch (exception) {
+            setIsError(true);
+            setMessage(exception);
         }
     }
 

@@ -101,7 +101,7 @@ else{
 
   
    
-    if(result[0].password == req.body.password){
+    if(result[0] != undefined && result[0].password == req.body.password){
       res.send(result)
     }
       else{

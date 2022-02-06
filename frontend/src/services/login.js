@@ -19,6 +19,7 @@ const logUser = 'rest/api/login';
 const register = async payload => {
   const response = await axiosService.post(addUser, payload);
   return response.data;
+
 }
 
 const login = async payload => {

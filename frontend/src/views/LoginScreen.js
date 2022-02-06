@@ -51,7 +51,6 @@ const LoginScreen = () => {
                 }
                     
                 else{
-                    alert(`Thank you for registering.`);
                     setMessage(`Thank you for registering.`);
                     setIsLogin(true);
                 }

@@ -18,7 +18,9 @@ const logUser = 'rest/api/login';
 // calls are this easy for json formatted https://github.com/axios/axios#example
 const register = async payload => {
   const response = await axiosService.post(addUser, payload);
+  console.log(response)
   return response.data;
+
 }
 
 const login = async payload => {

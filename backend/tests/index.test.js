@@ -5,9 +5,11 @@ const app = require('../app')
 
 const api = supertest(app)
 
+// We don't have a command to delete, so try to create a test user (if not already created)
 beforeAll(async() => {
   const result = await api
     .post('/rest/api/add-user')
+    // this is how to send a payload
     .send({
       email: 'test',
       hin: 'test',

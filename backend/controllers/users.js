@@ -1,6 +1,7 @@
 var express = require('express');
 const usersRouter = express.Router();
 const User = require("../models/user")
+const logger = require('../utils/logger')
 var MongoClient = require('mongodb').MongoClient;
 const config = require('../utils/config')
 
@@ -30,12 +31,12 @@ usersRouter.post('/add-user', function (req, res) {
 
     payload.save((err, data) => {
       if (err) {
-        console.log(err)
+        logger.info(err)
         res.send("error: email or health insurance number already taken ")
       }
       else {
         res.send("perfect: form sent")
-        console.log(data)
+        logger.info(data)
       }
     })
   }
@@ -43,9 +44,10 @@ usersRouter.post('/add-user', function (req, res) {
 
 usersRouter.get('/users', function (req, res) {
   return_query(function (result) {
-    res.send(result)
+    // Only output to npm console (not browser console) because it exposes password
+    logger.info(result)
+    res.send('Sent result to console.')
   });
-
 });
 
 usersRouter.post('/login', function (req, res) {
@@ -71,7 +73,7 @@ function return_query(my_callback) {
     var db_var = db.db(dbName);
     db_var.collection("channels").find().toArray(function (err, result) {
       if (err) throw err;
-      console.log(result);
+      logger.info(result);
       my_callback(result)
       db.close()
     });
@@ -84,7 +86,7 @@ function return_query_load(my_callback, load) {
     var db_var = db.db(dbName);
     db_var.collection("channels").find({ email: load }).toArray(function (err, result) {
       if (err) throw err;
-      console.log(result);
+      logger.info(result);
       my_callback(result)
       db.close()
     });

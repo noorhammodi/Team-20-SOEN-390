@@ -3,39 +3,30 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require("mongoose")
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-var indexRouter = require('./routes/index');
-var testRouter = require('./routes/test');
+const config = require('./utils/config')
+const indexRouter = require('./routes/index');
+const statusRouter = require('./routes/status');
 const usersRouter = require('./controllers/users');
+const logger = require('./utils/logger')
 
 var app = express();
 
-// Setting up Mongoose
-const dbName = "test1"
-const url = `mongodb+srv://soenapp390:asdzxc@cluster0.efezn.mongodb.net/${dbName}?retryWrites=true&w=majority`
-
-const connectionParams = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}
-
-mongoose.connect(url, connectionParams).then(() => {
-  console.log("connected to the db")
-}).catch((e) => {
-  console.log(e)
-})
-
 // Attach middlewares
 app.use(cors());
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Setting up Mongoose
+mongoose.connect(config.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+
 // Static Pages Routes
 app.use('/', indexRouter);
-app.use('/test', testRouter);
+app.use('/status', statusRouter);
 
 // API Routes
 app.use('/rest/api', usersRouter);

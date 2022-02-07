@@ -1,11 +1,15 @@
-const showDb = (url) => {
-  MongoClient.connect(url, function (err, db) {
+const MongoClient = require('mongodb').MongoClient;
+const config = require('./config')
+const logger = require('./logger')
+
+const showDb = () => {
+  MongoClient.connect(config.MONGO_URI, function (err, db) {
     if (err) throw err;
-    var dbo = db.db(dbName);
+    var dbo = db.db(config.DBNAME);
 
     dbo.collection("channels").find().toArray(function (err, result) {
       if (err) throw err;
-      console.log(result);
+      logger.info(result);
       db.close();
     });
   });

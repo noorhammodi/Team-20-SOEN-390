@@ -17,7 +17,7 @@ usersRouter.post('/add-user', function (req, res) {
   var lastName = req.body.lastName
 
   if (hin == '' || firstName == '' || email == '' || password == '' || lastName == '' || role == '') {
-    res.send("error: missing fields!!@!")
+    res.send("error: missing fields")
   }
   else {
     var payload = new User()

@@ -11,10 +11,12 @@ function Dashboard() {
     initialName = name;
     initialRole = role;
   }
+  
   const [message, setMessage] = useState('Welcome '+initialName+". Your role is "+initialRole+".");
   const getMessage = () =>{
       return message;
   }
+  
   return (
     <ImageBackground source={require('../public/images/login-background.png')} style={styles.image}>
           <View style={styles.card}>

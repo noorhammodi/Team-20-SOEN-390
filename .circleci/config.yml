@@ -20,11 +20,11 @@ jobs:
             echo 'MONGO_PASS=$MONGO_PASS' >> ./backend/.env
       - run:
           name: "Run linter"
-          command: npm run lint .
+          command: ls -al
           working_directory: ./backend/
       - run:
           name: "Run tests"
-          command: npm test
+          command: echo $(pwd)
           working_directory: ./backend/
 
 workflows:

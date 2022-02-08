@@ -98,7 +98,7 @@ describe('When the User database is initially empty', () => {
       })
       .expect(200)
       .expect('Content-Type', /application\/json/)
-   
+
     const body = result.body;
     expect(body.email).toContain('legit');
     expect(body.hin).toContain('legit');
@@ -108,7 +108,7 @@ describe('When the User database is initially empty', () => {
     expect(body.role).toContain('Patient');
   })
 
-  test('Cannot login on /api/login with bad credentials', async ()=> {
+  test('Cannot login on /api/login with bad credentials', async () => {
     const result = await api
       .post('/api/login')
       .send({

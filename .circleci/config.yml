@@ -21,9 +21,11 @@ jobs:
       - run:
           name: "Run linter"
           command: npm run lint .
+          working_directory: ./backend/
       - run:
           name: "Run tests"
           command: npm test
+          working_directory: ./backend/
 
 workflows:
   test_backend:

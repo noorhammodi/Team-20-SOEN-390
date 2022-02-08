@@ -7,9 +7,9 @@ const config = require('../utils/config')
 
 const dbName = config.DBNAME
 const url = config.MONGO_URI
-
 const collectionName = 'users'
 
+// Refactored way, easier to understand
 usersRouter.post('/register', async (request, response) => {
   const { body } = request;
   const user = new User({

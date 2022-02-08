@@ -11,8 +11,10 @@ jobs:
       - image: 'cimg/base:stable'
     steps:
       - checkout
-      - node/install:
-          node-install-dir: ./backend/
+      - run:
+          name: "Install Node"
+          command: npm install
+          working_directory: ./backend
       - run:
           name: "Setup custom environment variables"
           command: |
@@ -20,11 +22,11 @@ jobs:
             echo 'MONGO_PASS=$MONGO_PASS' >> ./backend/.env
       - run:
           name: "Run linter"
-          command: ls -al
+          command: npm run lint .
           working_directory: ./backend/
       - run:
           name: "Run tests"
-          command: echo $(pwd)
+          command: npm run test
           working_directory: ./backend/
 
 workflows:

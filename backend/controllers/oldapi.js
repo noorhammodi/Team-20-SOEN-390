@@ -1,96 +1,95 @@
 const express = require('express');
+
 const oldapiRouter = express.Router();
-const User = require("../models/user")
-const logger = require('../utils/logger')
-const MongoClient = require('mongodb').MongoClient;
-const config = require('../utils/config')
+// eslint-disable-next-line import/no-extraneous-dependencies
+const { MongoClient } = require('mongodb'); // will be removed anyway
+const User = require('../models/user');
+const logger = require('../utils/logger');
+const config = require('../utils/config');
 
-const dbName = config.DBNAME
-const url = config.MONGO_URI
-const collectionName = 'users'
+const dbName = config.DBNAME;
+const url = config.MONGO_URI;
+const collectionName = 'users';
 
-oldapiRouter.post('/add-user', function (req, res) {
-  const hin = req.body.hin
-  const email = req.body.email
-  const password = req.body.password
-  const role = req.body.role
-  const firstName = req.body.firstName
-  const lastName = req.body.lastName
+function returnQuery(myCallback) {
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    const dbVar = db.db(dbName);
+    // eslint-disable-next-line no-shadow
+    dbVar.collection(collectionName).find().toArray((err, result) => {
+      if (err) throw err;
+      logger.info(result);
+      myCallback(result);
+      db.close();
+    });
+  });
+}
 
-  if (hin == '' || firstName == '' || email == '' || password == '' || lastName == '' || role == '') {
-    res.send("error: missing fields")
-  }
-  else {
-    const payload = new User()
-    payload.firstName = firstName
-    payload.email = email
-    payload.hin = hin
-    payload.password = password
-    payload.role = role
-    payload.lastName = lastName
+function returnQueryLoad(myCallback, load) {
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    const dbVar = db.db(dbName);
+    // eslint-disable-next-line no-shadow
+    dbVar.collection(collectionName).find({ email: load }).toArray((err, result) => {
+      if (err) throw err;
+      logger.info(result);
+      myCallback(result);
+      db.close();
+    });
+  });
+}
+
+oldapiRouter.post('/add-user', (req, res) => {
+  const { hin } = req.body;
+  const { email } = req.body;
+  const { password } = req.body;
+  const { role } = req.body;
+  const { firstName } = req.body;
+  const { lastName } = req.body;
+
+  if (hin === '' || firstName === '' || email === '' || password === '' || lastName === '' || role === '') {
+    res.send('error: missing fields');
+  } else {
+    const payload = new User();
+    payload.firstName = firstName;
+    payload.email = email;
+    payload.hin = hin;
+    payload.password = password;
+    payload.role = role;
+    payload.lastName = lastName;
 
     payload.save((err, data) => {
       if (err) {
-        logger.info(err)
-        res.send("error: email or health insurance number already taken ")
+        logger.info(err);
+        res.send('error: email or health insurance number already taken ');
+      } else {
+        res.send('perfect: form sent');
+        logger.info(data);
       }
-      else {
-        res.send("perfect: form sent")
-        logger.info(data)
-      }
-    })
+    });
   }
 });
 
-oldapiRouter.get('/users', function (req, res) {
-  return_query(function (result) {
+oldapiRouter.get('/users', (req, res) => {
+  returnQuery((result) => {
     // Only output to npm console (not browser console) because it exposes password
-    logger.info(result)
-    res.send('Sent result to console.')
+    logger.info(result);
+    res.send('Sent result to console.');
   });
 });
 
-oldapiRouter.post('/login', function (req, res) {
+oldapiRouter.post('/login', (req, res) => {
   if (req.body.email == null || req.body.password == null) {
-    res.send("error: field missing")
-
-  }
-  else {
-    return_query_load(function (result) {
-      if (result[0] != undefined && result[0].password == req.body.password) {
-        res.send(result)
-      }
-      else {
-        res.send("error: invalid password")
+    res.send('error: field missing');
+  } else {
+    returnQueryLoad((result) => {
+      if (result[0] !== undefined && result[0].password === req.body.password) {
+        res.send(result);
+      } else {
+        res.send('error: invalid password');
       }
     }, req.body.email);
   }
 });
-
-function return_query(my_callback) {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    const db_var = db.db(dbName);
-    db_var.collection(collectionName).find().toArray(function (err, result) {
-      if (err) throw err;
-      logger.info(result);
-      my_callback(result)
-      db.close()
-    });
-  });
-};
-
-function return_query_load(my_callback, load) {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    const db_var = db.db(dbName);
-    db_var.collection(collectionName).find({ email: load }).toArray(function (err, result) {
-      if (err) throw err;
-      logger.info(result);
-      my_callback(result)
-      db.close()
-    });
-  });
-};
 
 module.exports = oldapiRouter;

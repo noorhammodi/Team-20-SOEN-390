@@ -1,20 +1,22 @@
-const MongoClient = require('mongodb').MongoClient;
-const config = require('./config')
-const logger = require('./logger')
+// eslint-disable-next-line import/no-extraneous-dependencies
+const { MongoClient } = require('mongodb');
+const config = require('./config');
+const logger = require('./logger');
 
 const showDb = () => {
-  MongoClient.connect(config.MONGO_URI, function (err, db) {
+  MongoClient.connect(config.MONGO_URI, (err, db) => {
     if (err) throw err;
-    var dbo = db.db(config.DBNAME);
+    const dbo = db.db(config.DBNAME);
 
-    dbo.collection("channels").find().toArray(function (err, result) {
+    // eslint-disable-next-line no-shadow
+    dbo.collection('channels').find().toArray((err, result) => {
       if (err) throw err;
       logger.info(result);
       db.close();
     });
   });
-}
+};
 
 module.exports = {
   showDb,
-}
+};

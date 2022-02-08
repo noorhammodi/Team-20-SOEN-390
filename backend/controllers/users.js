@@ -1,6 +1,7 @@
 const express = require('express');
+
 const usersRouter = express.Router();
-const User = require("../models/user")
+const User = require('../models/user');
 
 // Register a new user
 usersRouter.post('/', async (request, response) => {
@@ -14,12 +15,12 @@ usersRouter.post('/', async (request, response) => {
     password: body.password,
     firstName: body.firstName,
     lastName: body.lastName,
-    role: body.role
-  })
+    role: body.role,
+  });
 
   // Send the payload via mongoose, wait for response then return it
-  const savedUser = await user.save()
-  response.json(savedUser)
-})
+  const savedUser = await user.save();
+  response.json(savedUser);
+});
 
 module.exports = usersRouter;

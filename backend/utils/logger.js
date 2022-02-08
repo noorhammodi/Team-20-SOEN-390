@@ -15,8 +15,15 @@ const debug = (...params) => {
   console.log(...params)
 }
 
+const testinfo = (...params) => {
+  if (process.env.NODE_ENV == 'test') {
+    console.log(...params)
+  }
+}
+
 module.exports = {
   info,
   error,
   debug,
+  testinfo,
 }

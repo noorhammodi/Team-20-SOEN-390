@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
+const logger = require('../utils/logger')
+const config = require('../utils/config')
 const User = require('../models/user')
 
 const api = supertest(app)
-
-
 
 test('/ is accessible', async () => {
   await api
@@ -20,11 +20,10 @@ test('/status is accessible', async () => {
 })
 
 describe('When the User database is initially empty', () => {
-  // We don't have a command to delete yet
-  // instead we try to create a test user (if not already created)
   beforeAll(async () => {
+    // Clean the test database first
     await User.deleteMany({})
-    
+    logger.testinfo(`Using DB: ${config.DBNAME}`) 
   })
   
   test('Can Register (Old way)', async () => {
@@ -43,7 +42,7 @@ describe('When the User database is initially empty', () => {
   })
 
   test('Can Login (Old way)', async () => {
-    // this test expects a test user already created
+    // this test expects a test user already created (must be after registration)
     const result = await api
       .post('/rest/api/login')
       .send({
@@ -52,7 +51,6 @@ describe('When the User database is initially empty', () => {
       })
       .expect(200)
 
-    console.log(result)
     const body = result.body[0]
 
     expect(body.email).toContain('test')
@@ -77,7 +75,7 @@ describe('When the User database is initially empty', () => {
 
   test('Can register with new fn under /rest/api/register', async () => {
     const result = await api
-      .post('/rest/api/register')
+      .post('/api/users')
       .send({
         email: 'legit',
         hin: 'legit',

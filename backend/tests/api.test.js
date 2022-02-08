@@ -118,7 +118,6 @@ describe('When the User database is initially empty', () => {
       .expect(401)
       .expect('Content-Type', /application\/json/)
 
-    console.log(result)
     const body = result.body;
     expect(body.error).toContain('Invalid Username or Password')
   })

@@ -3,6 +3,8 @@ const User = require('../models/user')
 
 loginRouter.post('/', async (request, response) => {
   const { body } = request;
+  
+  // Query MongoDb with email and get matching user (will be null if none)
   const user = await User.findOne({
     email: body.email
   })
@@ -12,12 +14,14 @@ loginRouter.post('/', async (request, response) => {
     ? false
     : body.password === user.password
 
+  // Bad username or Password: 401
   if (!(user && isCorrectPassword)) {
     return response.status(401).json({
       error: 'Error: Invalid Username or Password'
     })
   }
 
+  // OK 200
   return response.status(200).json({
     email: user.email,
     hin: user.hin,

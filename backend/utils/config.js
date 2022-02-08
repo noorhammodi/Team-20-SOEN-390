@@ -11,9 +11,7 @@ const TEST_DBNAME = 'jevaisbienaller-test'
 const MONGO_USERNAME = process.env.MONGO_USER; 
 const MONGO_PASSWORD = process.env.MONGO_PASS;
 const DBNAME = getDbName();
-const MONGO_URI = getMongoUri();
-
-logger.info(`Current db name: ${DBNAME}`);
+const MONGO_URI = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.efezn.mongodb.net/${DBNAME}?retryWrites=true&w=majority`;
 
 /**
  * 
@@ -31,14 +29,6 @@ function getDbName() {
       return TEST_DBNAME;
       break;
   }
-}
-
-/**
- * 
- * @returns Correct Mongo URI depending on environment
- */
-function getMongoUri() {
- return `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.efezn.mongodb.net/${DBNAME}?retryWrites=true&w=majority`
 }
 
 /**

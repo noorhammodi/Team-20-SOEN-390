@@ -6,7 +6,23 @@ var MongoClient = require('mongodb').MongoClient;
 const config = require('../utils/config')
 
 const dbName = config.DBNAME
-const url = config.MONGO_URI 
+const url = config.MONGO_URI
+
+const collectionName = 'users'
+
+usersRouter.post('/register', async (request, response) => {
+  const { body } = request;
+  const user = new User({
+    email: body.email,
+    hin: body.hin,
+    password: body.password,
+    firstName: body.firstName,
+    lastName: body.lastName,
+    role: body.role
+  })
+  const savedUser = await user.save()
+  response.json(savedUser)
+})
 
 usersRouter.post('/add-user', function (req, res) {
 
@@ -71,7 +87,7 @@ function return_query(my_callback) {
   MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     var db_var = db.db(dbName);
-    db_var.collection("channels").find().toArray(function (err, result) {
+    db_var.collection(collectionName).find().toArray(function (err, result) {
       if (err) throw err;
       logger.info(result);
       my_callback(result)
@@ -84,7 +100,7 @@ function return_query_load(my_callback, load) {
   MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     var db_var = db.db(dbName);
-    db_var.collection("channels").find({ email: load }).toArray(function (err, result) {
+    db_var.collection(collectionName).find({ email: load }).toArray(function (err, result) {
       if (err) throw err;
       logger.info(result);
       my_callback(result)

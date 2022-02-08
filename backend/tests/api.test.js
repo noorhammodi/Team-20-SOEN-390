@@ -1,11 +1,11 @@
-const { TestWatcher } = require('@jest/core')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
 
 const api = supertest(app)
 
-// We don't have a command to delete, so try to create a test user (if not already created)
+// We don't have a command to delete yet
+// instead we try to create a test user (if not already created)
 beforeAll(async() => {
   const result = await api
     .post('/rest/api/add-user')
@@ -18,7 +18,6 @@ beforeAll(async() => {
       lastName: 'test',
       role: 'Patient'
     })
-  
 })
 
 test('/ is accessible', async () => {
@@ -34,6 +33,7 @@ test('/status is accessible', async () => {
 })
 
 test('Can Login', async () => {
+  // this test expects a test user already created
   const result = await api
     .post('/rest/api/login')
     .send({
@@ -41,8 +41,8 @@ test('Can Login', async () => {
       password: 'test'
     })
     .expect(200)
-    .expect('Content-Type', /application\/json/)
- 
+
+  console.log(result)
   const body = result.body[0]
 
   expect(body.email).toContain('test')
@@ -51,6 +51,23 @@ test('Can Login', async () => {
   expect(body.firstName).toContain('test')
   expect(body.lastName).toContain('test')
   expect(body.role).toContain('Patient')
+})
+
+
+
+test('Can register with new fn under /rest/api/register', async () => {
+  const result = await api
+    .post('/rest/api/register')
+    .send({
+      email: 'legit',
+      hin: 'legit',
+      password: 'legit',
+      firstName: 'legit',
+      lastName: 'legit',
+      role: 'Patient'
+    })
+    .expect(400) 
+
 })
 
 // Close mongoose connection from supertest(app)

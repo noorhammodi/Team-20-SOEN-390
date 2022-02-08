@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require('mongoose-unique-validator')
 
-const channelSchema= new mongoose.Schema({
+const userSchema = new mongoose.Schema({
 
-    email:{
+    email: {
         type: String,
         required: true,
         trim: true,
         unique: true
     },
 
-    hin:{
+    hin: {
         type: String,
         required: true,
         trim: true,
@@ -21,27 +22,27 @@ const channelSchema= new mongoose.Schema({
         required: true,
         trim: true,
     },
-    
-    firstName:{
-        type: String,
-        required: true,
-        trim: true,       
-    },
 
-    lastName:{
-        type: String,
-        required: true,
-        trim: true,       
-    },
-
-    role:{
+    firstName: {
         type: String,
         required: true,
         trim: true,
-        unique: true
+    },
+
+    lastName: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+
+    role: {
+        type: String,
+        required: true,
+        trim: true,
     }
 })
 
+userSchema.plugin(uniqueValidator)
 
-const channelModel=mongoose.model("Channel",channelSchema)
-module.exports=channelModel
+const User = mongoose.model("User", userSchema)
+module.exports = User

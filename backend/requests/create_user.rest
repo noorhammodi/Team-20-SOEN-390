@@ -1,0 +1,6 @@
+POST http://localhost:3001/rest/api/register/ HTTP/1.1 
+content-type: application/json
+
+{
+  "email": "test1","hin": "test1","password": "test","firstName": "test","lastName": "legit","role": "Patient"
+}

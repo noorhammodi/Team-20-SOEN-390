@@ -33,7 +33,6 @@ mongoose.connect(config.MONGO_URI, {
 logger.info(`Connected to db: ${config.DBNAME}`)
 logger.info(`Listening on port: ${config.PORT}`)
 
-
 // Static Pages Routes
 app.use('/', indexRouter);
 app.use('/status', statusRouter);

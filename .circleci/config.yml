@@ -8,12 +8,9 @@ orbs:
 jobs:
   backendtest:
     docker:
-      - image: 'cimg/base:stable'
+      - image: 'cimg/node:17.4.0'
     steps:
       - checkout
-      - run:
-          name: "Install Npm"
-          command: sudo npm isntall -g npm@latest
       - run:
           name: "Install Node"
           command: npm install

@@ -12,6 +12,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Install Npm"
+          command: sudo npm isntall -g npm@latest
+      - run:
           name: "Install Node"
           command: npm install
           working_directory: ./backend

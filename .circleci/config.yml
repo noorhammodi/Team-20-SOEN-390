@@ -6,7 +6,7 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.0
 jobs:
-  backendtest:
+  backend-tests:
     docker:
       - image: 'cimg/node:17.4.0'
     steps:
@@ -28,7 +28,7 @@ jobs:
           name: "Run tests"
           command: npm run test
           working_directory: ./backend/
-  frontendtest:
+  frontend-tests:
     docker:
       - image: 'cimg/node:17.4.0'
     steps:
@@ -38,6 +38,10 @@ jobs:
           command: npm install
           working_directory: ./frontend
       - run:
+          name: "Run linter"
+          command: npm run lint .
+          working_directory: ./frontend/
+      - run:
           name: "Run tests"
           command: npm run test
           working_directory: ./frontend/
@@ -45,8 +49,8 @@ jobs:
 workflows:
   test_backend:
       jobs:
-        - backendtest
+        - backend-tests
   test_frontend:
       jobs:
-        - frontendtest
+        - frontend-tests
 

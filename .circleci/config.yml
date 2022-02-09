@@ -28,9 +28,25 @@ jobs:
           name: "Run tests"
           command: npm run test
           working_directory: ./backend/
+  frontendtest:
+    docker:
+      - image: 'cimg/node:17.4.0'
+    steps:
+      - checkout
+      - run:
+          name: "Install Node"
+          command: npm install
+          working_directory: ./frontend
+      - run:
+          name: "Run tests"
+          command: npm run test
+          working_directory: ./backend/
 
 workflows:
   test_backend:
       jobs:
         - backendtest
+  test_frontend:
+      jobs:
+        - frontendtest
 

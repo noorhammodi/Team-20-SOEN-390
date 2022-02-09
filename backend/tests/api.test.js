@@ -69,7 +69,7 @@ describe('When the User database is initially empty', () => {
         email: 'bad',
         password: 'credentials',
       })
-      .expect(400);
+      .expect(200);
 
     expect(result.text).toContain('invalid');
   });

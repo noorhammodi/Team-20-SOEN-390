@@ -40,7 +40,7 @@ jobs:
       - run:
           name: "Run tests"
           command: npm run test
-          working_directory: ./backend/
+          working_directory: ./frontend/
 
 workflows:
   test_backend:

@@ -78,24 +78,28 @@ usersRouter.put('/:id', async (request, response) => {
   };
 
   // nonModifiedUser is the document _before_ update was applied
-  const nonModifiedUser = await User.findOneAndUpdate(filter, update);
+  try {
+    const nonModifiedUser = await User.findOneAndUpdate(filter, update);
 
-  const modifiedUser = {
-    email: request.body.email,
-    hin: request.body.hin,
-    password: request.body.password,
-    firstName: request.body.firstName,
-    lastName: request.body.lastName,
-    role: request.body.role,
-    associated_users: request.body.associated_users,
-  };
+    const modifiedUser = {
+      email: request.body.email,
+      hin: request.body.hin,
+      password: request.body.password,
+      firstName: request.body.firstName,
+      lastName: request.body.lastName,
+      role: request.body.role,
+      associated_users: request.body.associated_users,
+    };
 
-  response.json(
-    {
-      beforeModification: nonModifiedUser,
-      afterModification: modifiedUser,
-    },
-  );
+    response.json(
+      {
+        beforeModification: nonModifiedUser,
+        afterModification: modifiedUser,
+      },
+    );
+  } catch (err) {
+    response.json(err);
+  }
 });
 
 module.exports = usersRouter;

@@ -20,28 +20,35 @@ usersRouter.post('/', async (request, response) => {
   });
 
   // Send the payload via mongoose, wait for response then return it
-  try {
-    const savedUser = await user.save();
-    response.json(savedUser);
-  } catch (err) {
-    response.json(err);
+  const savedUser = await user.save();
+  response.json(savedUser);
+});
+
+usersRouter.delete('/', async (request, response) => {
+  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+    await User.deleteMany({});
+    response.status(204).end();
+  } else {
+  // Unauthorized
+    response.status(401).json({
+      error: 'Unauthorized operation',
+    });
+  }
+});
+// Get a list of users.
+usersRouter.get('/all_users', async (request, response) => {
+  if (process.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+    const users = await User.find();
+    response.json(users);
+  } else {
+    response.status(401).json({
+      error: 'Unauthorized operation',
+    });
   }
 });
 
-// Get a list of users.
-usersRouter.get('/all_users', (request, response) => {
-  User.find()
-    .then((result) => {
-      response.json(result);
-      response.end();
-    })
-    .catch((err) => {
-      response.json(err);
-    });
-});
-
 // Get (the information of) a particular user.
-usersRouter.get('/:id', (request, response) => {
+usersRouter.get('/:id', async (request, response) => {
   const { id } = request.params;
 
   User.findById(id)
@@ -55,7 +62,7 @@ usersRouter.get('/:id', (request, response) => {
 });
 
 // Delete (the information of) a particular user.
-usersRouter.delete('/:id', (request, response) => {
+usersRouter.delete('/:id', async (request, response) => {
   const { id } = request.params;
   User.findByIdAndDelete(id)
     .then((result) => {

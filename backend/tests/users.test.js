@@ -11,7 +11,7 @@ const api = supertest(app);
 const { TEST_PATIENT1, TEST_PATIENT2 } = usersHelper.testPatients;
 const { TEST_DOCTOR1 } = usersHelper.testDoctors;
 
-describe('When the User database only has TEST_PATIENT1 and TEST_DOCTOR1', () => {
+describe('REST API requests on /api/users/', () => {
   beforeAll(async () => {
     // Clean the test database first
     await User.deleteMany({});
@@ -21,39 +21,6 @@ describe('When the User database only has TEST_PATIENT1 and TEST_DOCTOR1', () =>
     const doctor1 = new User(TEST_DOCTOR1);
 
     await doctor1.save();
-  });
-
-  test('POST /api/login : TEST_PATIENT1 can login', async () => {
-    const result = await api
-      .post('/api/login')
-      .send({
-        email: TEST_PATIENT1.email,
-        password: TEST_PATIENT1.password,
-      })
-      .expect(200)
-      .expect('Content-Type', /application\/json/);
-
-    const { body } = result;
-    expect(body.email).toContain(TEST_PATIENT1.email);
-    expect(body.hin).toContain(TEST_PATIENT1.hin);
-    expect(body.password).toContain(TEST_PATIENT1.password);
-    expect(body.firstName).toContain(TEST_PATIENT1.firstName);
-    expect(body.lastName).toContain(TEST_PATIENT1.lastName);
-    expect(body.role).toContain(TEST_PATIENT1.role);
-  });
-
-  test('POST /api/login : TEST_PATIENT1 cannot login with bad credentials', async () => {
-    const result = await api
-      .post('/api/login')
-      .send({
-        email: TEST_PATIENT2.email,
-        password: 'notlegit',
-      })
-      .expect(401)
-      .expect('Content-Type', /application\/json/);
-
-    const { body } = result;
-    expect(body.error).toContain('Invalid Username or Password');
   });
 
   test('POST /api/users : TEST_PATIENT2 can register', async () => {

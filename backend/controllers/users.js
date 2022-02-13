@@ -43,7 +43,6 @@ usersRouter.get('/', async (request, response) => {
     const users = await User.find();
     response.json(users);
   } else {
-    console.log(process.env.NODE_ENV);
     response.status(401).json({
       error: 'Unauthorized operation',
     });
@@ -53,15 +52,9 @@ usersRouter.get('/', async (request, response) => {
 // Get (the information of) a particular user.
 usersRouter.get('/:id', async (request, response) => {
   const { id } = request.params;
-
-  User.findById(id)
-    .then((result) => {
-      response.json(result);
-      response.end();
-    })
-    .catch((err) => {
-      response.json(err);
-    });
+  
+  const result = await User.findById(id);
+  response.json(result);
 });
 
 // Delete (the information of) a particular user.

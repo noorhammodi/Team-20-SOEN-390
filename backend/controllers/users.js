@@ -23,7 +23,7 @@ usersRouter.post('/', async (request, response) => {
   response.json(savedUser);
 });
 
-// Get the information of a particular user.
+// Get (the information of) a particular user.
 usersRouter.get('/:id', (request, response) => {
   const { id } = request.params;
 

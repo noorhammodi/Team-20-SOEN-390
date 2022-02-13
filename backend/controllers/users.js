@@ -42,7 +42,7 @@ usersRouter.get('/:id', (request, response) => {
 
   User.findById(id)
     .then((result) => {
-      response.send(result);
+      response.json(result);
       response.end();
     })
     .catch((err) => {

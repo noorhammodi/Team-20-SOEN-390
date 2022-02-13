@@ -3,6 +3,18 @@ const express = require('express');
 const usersRouter = express.Router();
 const User = require('../models/user');
 
+// Gets a list of users (does not work in prod)
+usersRouter.get('/', async (request, response) => {
+  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+    const users = await User.find();
+    response.json(users);
+  } else {
+    response.status(401).json({
+      error: 'Unauthorized operation',
+    });
+  }
+});
+
 // Register a new user
 usersRouter.post('/', async (request, response) => {
   // Get request.body and put it in new var body
@@ -30,19 +42,7 @@ usersRouter.delete('/', async (request, response) => {
     await User.deleteMany({});
     response.status(204).end();
   } else {
-  // Unauthorized
-    response.status(401).json({
-      error: 'Unauthorized operation',
-    });
-  }
-});
-
-// Gets a list of users (does not work in prod)
-usersRouter.get('/', async (request, response) => {
-  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
-    const users = await User.find();
-    response.json(users);
-  } else {
+    // Unauthorized
     response.status(401).json({
       error: 'Unauthorized operation',
     });
@@ -52,31 +52,22 @@ usersRouter.get('/', async (request, response) => {
 // Get (the information of) a particular user.
 usersRouter.get('/:id', async (request, response) => {
   const { id } = request.params;
-  
+
+  // TODO Should probably make sure it's the user first
+  // or anonymize the data
+
   const result = await User.findById(id);
   response.json(result);
-});
-
-// Delete (the information of) a particular user.
-usersRouter.delete('/:id', async (request, response) => {
-  const { id } = request.params;
-  User.findByIdAndDelete(id)
-    .then((result) => {
-      response.json(result);
-    })
-    .catch((err) => {
-      response.json(err);
-    });
 });
 
 // Modify (the information of) a particular user.
 usersRouter.put('/:id', async (request, response) => {
   const { id } = request.params;
 
-  const filter = { _id: id /* , email: request.body.email, hin: request.body.hin */ };
+  const filter = { _id: id };
   const update = {
-    /* email: request.body.email,
-    hin: request.body.hin, */
+    email: request.body.email,
+    hin: request.body.hin,
     password: request.body.password,
     firstName: request.body.firstName,
     lastName: request.body.lastName,
@@ -84,29 +75,22 @@ usersRouter.put('/:id', async (request, response) => {
     associated_users: request.body.associated_users,
   };
 
-  // nonModifiedUser is the document _before_ update was applied
-  try {
-    const nonModifiedUser = await User.findOneAndUpdate(filter, update);
+  // Update and return the new object
+  // { new: true } is a parameter to return the new object
+  // otherwise it returns the original object.
+  const result = await User.findOneAndUpdate(filter, update, { new: true });
+  response.json(result);
+});
 
-    const modifiedUser = {
-      email: request.body.email,
-      hin: request.body.hin,
-      password: request.body.password,
-      firstName: request.body.firstName,
-      lastName: request.body.lastName,
-      role: request.body.role,
-      associated_users: request.body.associated_users,
-    };
+// Delete (the information of) a particular user.
+usersRouter.delete('/:id', async (request, response) => {
+  const { id } = request.params;
 
-    response.json(
-      {
-        beforeModification: nonModifiedUser,
-        afterModification: modifiedUser,
-      },
-    );
-  } catch (err) {
-    response.json(err);
-  }
+  // TODO Should probably make sure it's the user first
+  // or some authorized user
+
+  await User.findByIdAndDelete(id);
+  response.status(204).end();
 });
 
 module.exports = usersRouter;

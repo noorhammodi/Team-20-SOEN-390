@@ -1,0 +1,4 @@
+# Get User first through
+## GET http://localhost:3001/api/users/
+# Using __id, delete
+DELETE http://localhost:3001/api/users/620989dc2a9dc940b6eac692

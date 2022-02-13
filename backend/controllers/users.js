@@ -23,4 +23,18 @@ usersRouter.post('/', async (request, response) => {
   response.json(savedUser);
 });
 
+// Get the information of a particular user.
+usersRouter.get('/:id', (request, response) => {
+  const { id } = request.params;
+
+  User.findById(id)
+    .then((result) => {
+      response.send(result);
+      response.end();
+    })
+    .catch((err) => {
+      console.log('The error in our jevaisbienaller app is', err);
+    });
+});
+
 module.exports = usersRouter;

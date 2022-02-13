@@ -40,12 +40,12 @@ const userSchema = new mongoose.Schema({
     symptoms: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Symptom'
-    }],
-    doctors: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }]
-    */
+    }], */
+  associated_users: [
+    // type: mongoose.Schema.Types.ObjectId,
+    // ref: 'User',
+    this,
+  ],
 });
 
 // Bind uniqueValidator to schema

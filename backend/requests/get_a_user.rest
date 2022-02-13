@@ -1,0 +1,3 @@
+# Get a user
+# Use the format `/users/:id` (Get the id from `get_all_users.rest`)
+GET http://localhost:3001/api/users/620984557cc7c47c2088b3c4

@@ -29,6 +29,7 @@ loginRouter.post('/', async (request, response) => {
     firstName: user.firstName,
     lastName: user.lastName,
     role: user.role,
+    associated_users: user.associated_users,
   });
 });
 

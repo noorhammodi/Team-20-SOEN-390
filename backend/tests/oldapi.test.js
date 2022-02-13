@@ -9,7 +9,7 @@ const api = supertest(app);
 
 const { TEST_PATIENT1 } = usersHelper.testPatients;
 
-describe('(Old Api) When the User database is initially empty', () => {
+describe('(Old Api) REST API requests on /rest/api/', () => {
   beforeAll(async () => {
     // Clean the test database first
     await User.deleteMany({});

@@ -24,6 +24,7 @@ usersRouter.post('/', async (request, response) => {
   response.json(savedUser);
 });
 
+// Deletes user (does not work in prod)
 usersRouter.delete('/', async (request, response) => {
   if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     await User.deleteMany({});
@@ -35,12 +36,14 @@ usersRouter.delete('/', async (request, response) => {
     });
   }
 });
-// Get a list of users.
-usersRouter.get('/all_users', async (request, response) => {
-  if (process.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+
+// Gets a list of users (does not work in prod)
+usersRouter.get('/', async (request, response) => {
+  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     const users = await User.find();
     response.json(users);
   } else {
+    console.log(process.env.NODE_ENV);
     response.status(401).json({
       error: 'Unauthorized operation',
     });

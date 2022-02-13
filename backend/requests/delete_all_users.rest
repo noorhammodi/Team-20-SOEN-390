@@ -1,2 +1,2 @@
-# Only works in dev or test
+# Deletes all users (only works in dev or test)
 DELETE http://localhost:3001/api/users/ 

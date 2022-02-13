@@ -1,2 +1,2 @@
 # Only works in dev or test
-GET http://localhost:3001/api/users/all_users/
+GET http://localhost:3001/api/users/

@@ -46,7 +46,7 @@ usersRouter.get('/:id', (request, response) => {
       response.end();
     })
     .catch((err) => {
-      console.log('The error in our jevaisbienaller app is', err);
+      response.json(err);
     });
 });
 

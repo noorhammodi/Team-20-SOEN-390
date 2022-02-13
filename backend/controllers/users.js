@@ -58,7 +58,7 @@ usersRouter.delete('/:id', (request, response) => {
       response.json(result);
     })
     .catch((err) => {
-      console.log(err);
+      response.json(err);
     });
 });
 

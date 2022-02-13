@@ -28,7 +28,7 @@ usersRouter.post('/', async (request, response) => {
 usersRouter.get('/all_users', (request, response) => {
   User.find()
     .then((result) => {
-      response.send(result);
+      response.json(result);
       response.end();
     })
     .catch((err) => {

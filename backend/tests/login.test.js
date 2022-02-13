@@ -11,7 +11,7 @@ const api = supertest(app);
 const { TEST_PATIENT1, TEST_PATIENT2 } = usersHelper.testPatients;
 const { TEST_DOCTOR1 } = usersHelper.testDoctors;
 
-describe('REST API resquests on /api/login', () => {
+describe('REST API requests on /api/login', () => {
   beforeAll(async () => {
     // Clean the test database first
     await User.deleteMany({});

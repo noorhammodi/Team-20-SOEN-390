@@ -50,4 +50,16 @@ usersRouter.get('/:id', (request, response) => {
     });
 });
 
+// Delete (the information of) a particular user.
+usersRouter.delete('/:id', (request, response) => {
+  const { id } = request.params;
+  User.findByIdAndDelete(id)
+    .then((result) => {
+      response.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 module.exports = usersRouter;

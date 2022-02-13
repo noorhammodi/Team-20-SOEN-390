@@ -11,16 +11,14 @@ const api = supertest(app);
 const { TEST_PATIENT1, TEST_PATIENT2 } = usersHelper.testPatients;
 const { TEST_DOCTOR1 } = usersHelper.testDoctors;
 
-describe('REST API requests on /api/login', () => {
+describe('REST API requests on /api/login (expects test users to be added)', () => {
   beforeAll(async () => {
     // Clean the test database first
     await User.deleteMany({});
 
     // Add the Test Users through Mongoose instead of API
     await new User(TEST_PATIENT1).save();
-    const doctor1 = new User(TEST_DOCTOR1);
-
-    await doctor1.save();
+    await new User(TEST_DOCTOR1).save();
   });
 
   test('POST /api/login : TEST_PATIENT1 can login', async () => {

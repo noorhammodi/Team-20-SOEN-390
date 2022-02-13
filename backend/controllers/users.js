@@ -62,6 +62,7 @@ usersRouter.delete('/:id', (request, response) => {
     });
 });
 
+// Modify (the information of) a particular user.
 usersRouter.put('/:id', async (request, response) => {
   const { id } = request.params;
 

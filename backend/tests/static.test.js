@@ -6,12 +6,12 @@ const app = require('../app');
 const api = supertest(app);
 
 describe('Static routes tests', () => {
-  test('/ is accessible', async () => {
+  test('GET / : accessible', async () => {
     await api
       .get('/')
       .expect(200);
   });
-  test('/status is accessible', async () => {
+  test('GET /status : is accessible', async () => {
     await api
       .get('/status')
       .expect(200);

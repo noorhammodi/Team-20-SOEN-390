@@ -20,8 +20,12 @@ usersRouter.post('/', async (request, response) => {
   });
 
   // Send the payload via mongoose, wait for response then return it
-  const savedUser = await user.save();
-  response.json(savedUser);
+  try {
+    const savedUser = await user.save();
+    response.json(savedUser);
+  } catch (err) {
+    response.json(err);
+  }
 });
 
 // Get a list of users.

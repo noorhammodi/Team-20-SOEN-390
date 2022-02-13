@@ -23,6 +23,18 @@ usersRouter.post('/', async (request, response) => {
   response.json(savedUser);
 });
 
+// Get a list of users.
+usersRouter.get('/all_users', (request, response) => {
+  User.find()
+    .then((result) => {
+      response.send(result);
+      response.end();
+    })
+    .catch((err) => {
+      console.log('The error in our jevaisbienaller app is', err);
+    });
+});
+
 // Get (the information of) a particular user.
 usersRouter.get('/:id', (request, response) => {
   const { id } = request.params;

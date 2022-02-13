@@ -16,6 +16,7 @@ usersRouter.post('/', async (request, response) => {
     firstName: body.firstName,
     lastName: body.lastName,
     role: body.role,
+    associated_users: body.associated_users,
   });
 
   // Send the payload via mongoose, wait for response then return it

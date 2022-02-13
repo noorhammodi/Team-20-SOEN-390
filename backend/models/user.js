@@ -41,10 +41,11 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Symptom'
     }], */
-  associated_users: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-  }],
+  associated_users: [
+    // type: mongoose.Schema.Types.ObjectId,
+    // ref: 'User',
+    this,
+  ],
 });
 
 // Bind uniqueValidator to schema

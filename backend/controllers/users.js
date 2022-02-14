@@ -2,10 +2,11 @@ const express = require('express');
 
 const usersRouter = express.Router();
 const User = require('../models/user');
+const config = require('../utils/config');
 
 // Gets a list of users (does not work in prod)
 usersRouter.get('/', async (request, response) => {
-  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+  if (config.env.isDev() || config.env.isTest()) {
     const users = await User.find();
     response.json(users);
   } else {
@@ -38,7 +39,7 @@ usersRouter.post('/', async (request, response) => {
 
 // Deletes user (does not work in prod)
 usersRouter.delete('/', async (request, response) => {
-  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+  if (config.env.isDev || config.env.isTest) {
     await User.deleteMany({});
     response.status(204).end();
   } else {

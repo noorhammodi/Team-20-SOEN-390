@@ -49,11 +49,15 @@ const DBNAME = getDbName();
 const MONGO_URI = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.efezn.mongodb.net/${DBNAME}?retryWrites=true&w=majority`;
 
 // Env
-const ENV = process.env.NODE_ENV;
+const env = {
+  isDev: () => process.env.NODE_ENV === 'development',
+  isProd: () => process.env.NODE_ENV === 'production',
+  isTest: () => process.env.NODE_ENV === 'test',
+};
 
 module.exports = {
   PORT,
   DBNAME,
   MONGO_URI,
-  ENV,
+  env,
 };

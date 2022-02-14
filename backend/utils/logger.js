@@ -1,12 +1,14 @@
+const config = require('./config');
+
 /* eslint-disable no-console */
 const info = (...params) => {
-  if (process.env.NODE_ENV !== 'test') {
+  if (!config.env.isTest()) {
     console.log(...params);
   }
 };
 
 const error = (...params) => {
-  if (process.env.NODE_ENV !== 'test') {
+  if (!config.env.isTest()) {
     console.error(...params);
   }
 };
@@ -16,7 +18,7 @@ const debug = (...params) => {
 };
 
 const testinfo = (...params) => {
-  if (process.env.NODE_ENV === 'test') {
+  if (config.env.isTest()) {
     console.log(...params);
   }
 };

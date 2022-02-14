@@ -26,10 +26,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Setting up request logger (hide the jsondata when in prod)
-if (config.ENV === 'production') {
+if (config.env.isProd()) {
   app.use(middleware.requestLogger('tiny'));
 }
-if (config.ENV === 'development') {
+if (config.env.isDev()) {
   app.use(middleware.requestLogger(':method :url :status - :response-time ms :JSONdata'));
 }
 

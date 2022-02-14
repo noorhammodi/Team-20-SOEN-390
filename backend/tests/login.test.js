@@ -40,8 +40,6 @@ describe('REST API requests on /api/login (expects test users to be added)', () 
     expect(body.role).toContain(TEST_PATIENT1.role);
   });
 
-  console.log();
-
   test('POST /api/login : TEST_PATIENT1 cannot login with bad credentials', async () => {
     const result = await api
       .post('/api/login')

@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "lint": "./node_modules/.bin/eslint",
+    "lint:all": "./node_modules/.bin/eslint ./",
+    "lint:fix": "./node_modules/.bin/eslint ./ --fix",
     "start": "cross-env NODE_ENV=production node ./bin/www",
-    "dev": "cross-env NODE_ENV=development nodemon -L ./bin/www",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "lint": "./node_modules/.bin/eslint"
+    "dev": "cross-env NODE_ENV=development nodemon -L ./bin/www --exec \"npm run lint:fix && node\"",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

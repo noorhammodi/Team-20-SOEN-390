@@ -1,10 +1,13 @@
+const requestLogger = require('morgan');
 const logger = require('./logger');
 
-// Middlewares do operations on (request, reponse) whenever they happen
+// Log requests to console using morgan
+requestLogger.token('JSONdata', (request) => JSON.stringify(request.body));
 
+// Handle async errors
 const errorHandler = (error, request, response, next) => {
   // Prints error type to console
-  logger.info(`${error.name}: ${error.message}`);
+  logger.info(`ErrorHandler message:\nError Type: ${error.name}\n${error.message}`);
 
   if (error.name === 'ValidationError') {
     response.status(400);
@@ -22,5 +25,6 @@ const errorHandler = (error, request, response, next) => {
 };
 
 module.exports = {
+  requestLogger,
   errorHandler,
 };

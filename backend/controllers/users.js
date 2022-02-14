@@ -39,7 +39,7 @@ usersRouter.post('/', async (request, response) => {
 
 // Deletes user (does not work in prod)
 usersRouter.delete('/', async (request, response) => {
-  if (config.env.isDev || config.env.isTest) {
+  if (config.env.isDev() || config.env.isTest()) {
     await User.deleteMany({});
     response.status(204).end();
   } else {

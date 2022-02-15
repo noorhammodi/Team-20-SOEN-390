@@ -25,6 +25,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Setting up request logger (hide the jsondata when in prod)
+if (config.env.isProd()) {
+  app.use(middleware.requestLogger('tiny'));
+}
+if (config.env.isDev()) {
+  app.use(middleware.requestLogger(':method :url :status - :response-time ms :JSONdata'));
+}
+
 // Setting up Mongoose
 mongoose.connect(config.MONGO_URI, {
   useNewUrlParser: true,

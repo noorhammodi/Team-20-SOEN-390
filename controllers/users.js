@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 
 const usersRouter = express.Router();
 const User = require('../models/user');
@@ -35,6 +36,27 @@ usersRouter.post('/', async (request, response) => {
   // Send the payload via mongoose, wait for response then return it
   const savedUser = await user.save();
   response.json(savedUser);
+});
+
+// Register a new user
+usersRouter.post('/new', async (request, response) => {
+  // Get request.body and put it in new var body
+  const { body } = request;
+  const hashedpassword = await bcrypt.hash(body.password, 10);
+  // Using body, set new payload
+  const user = new User({
+    email: body.email,
+    hin: body.hin,
+    password: hashedpassword,
+    firstName: body.firstName,
+    lastName: body.lastName,
+    role: body.role,
+    associated_users: body.associated_users,
+  });
+
+  // Send the payload via mongoose, wait for response then return it
+  await user.save();
+  response.json('User saved');
 });
 
 // Deletes user (does not work in prod)

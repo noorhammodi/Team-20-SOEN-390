@@ -7,17 +7,17 @@ const devAxios = axios.create({
 
 const prodAxios = axios;
 const axiosService = config.isDev() ? devAxios : prodAxios;
-const logUser = 'api/login';
+const addUser = 'api/users';
 
 // calls are this easy for json formatted https://github.com/axios/axios#example
-const login = async (payload) => {
-  const response = await axiosService.post(logUser, payload);
+const register = async (payload) => {
+  const response = await axiosService.post(addUser, payload);
   return response;
 };
 
 // For export
-const loginService = {
-  login,
+const registerService = {
+  register,
 };
 
-export default loginService;
+export default registerService;

@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import {
   ImageBackground, View, Text, StyleSheet, TouchableOpacity, TextInput,
 } from 'react-native';
-import { useNavigate } from 'react-router-dom'; //  useLocation??
-import loginService from '../services/login';
+import { useNavigate } from 'react-router-dom'; // useLocation??
+import registerService from '../services/register';
 
 const imageBackground = require('../public/images/login-background.png');
 
-function LoginScreen() {
+function RegisterScreen() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [hin, setHIN] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [role, setRole] = useState('');
 
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState('');
@@ -22,18 +26,23 @@ function LoginScreen() {
     try {
       const payload = {
         email,
+        firstName,
+        lastName,
+        hin,
         password,
+        role,
       };
 
       // Get response from axios
-      const response = await loginService.login(payload);
+      const response = await registerService.register(payload);
       if (response.status === 200) {
         setIsError(false);
-        navigate('/dashboard', { state: { name: response.data.firstName, role: response.data.role } });
+        setMessage('Thank you for registering.');
+        navigate('/login');
       }
     } catch (exception) {
       setIsError(true);
-      setMessage('Error: Wrong Credentials');
+      setMessage('Error: Could not register');
     }
   };
 
@@ -123,11 +132,15 @@ function LoginScreen() {
   return (
     <ImageBackground source={imageBackground} style={styles.image}>
       <View style={styles.card}>
-        <Text style={styles.heading}>Login</Text>
+        <Text style={styles.heading}>Signup</Text>
         <View style={styles.form}>
           <View style={styles.inputs}>
             <TextInput style={styles.input} placeholder="Email" autoCapitalize="none" onChangeText={setEmail} />
+            <TextInput style={styles.input} placeholder="First Name" onChangeText={setFirstName} />
+            <TextInput style={styles.input} placeholder="Last Name" onChangeText={setLastName} />
             <TextInput secureTextEntry style={styles.input} placeholder="Password" onChangeText={setPassword} />
+            <TextInput style={styles.input} placeholder="Health Insurance Number" onChangeText={setHIN} />
+            <TextInput style={styles.input} placeholder="Role" onChangeText={setRole} />
             <Text style={[styles.message, { color: isError ? 'red' : 'green' }]}>{message ? getMessage() : null}</Text>
             <TouchableOpacity style={styles.button} onPress={onSubmit}>
               <Text style={styles.buttonText}>Submit</Text>
@@ -142,4 +155,4 @@ function LoginScreen() {
   );
 }
 
-export default LoginScreen;
+export default RegisterScreen;

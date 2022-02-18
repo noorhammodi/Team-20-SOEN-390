@@ -13,16 +13,8 @@ function MockLogin() {
   );
 }
 
-it("should have initial title 'Signup'", async () => {
+it("should have initial title 'Login'", async () => {
   render(<MockLogin />);
-  const title = screen.getByText(/signup/i);
-  expect(title).toBeInTheDocument();
-});
-
-it("should have changed title 'Login'", async () => {
-  render(<MockLogin />);
-  const submitButton = screen.getByText(/sign up|log in/i);
-  fireEvent.click(submitButton);
   const title = screen.getByText(/login/i);
   expect(title).toBeInTheDocument();
 });

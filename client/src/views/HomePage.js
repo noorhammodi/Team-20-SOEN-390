@@ -12,7 +12,7 @@ function HomePage() {
     navigate('/login', { state: { isLogin: true } });
   };
   const Signup = () => {
-    navigate('/login', { state: { isLogin: false } });
+    navigate('/register', { state: { isLogin: false } });
   };
 
   const styles = StyleSheet.create({

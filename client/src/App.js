@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import HomePage from './views/HomePage';
 import LoginScreen from './views/LoginScreen';
+import RegisterScreen from './views/RegisterScreen';
 import Dashboard from './views/Dashboard';
 
 const styles = StyleSheet.create({
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginScreen />} />
+          <Route path="/register" element={<RegisterScreen />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>

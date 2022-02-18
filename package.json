@@ -48,7 +48,8 @@
   "jest": {
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
-      "client", "cypress"
+      "client",
+      "cypress"
     ]
   }
 }

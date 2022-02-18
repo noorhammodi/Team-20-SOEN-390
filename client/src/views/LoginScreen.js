@@ -2,15 +2,8 @@ import React, { useState } from 'react';
 import {
   ImageBackground, View, Text, StyleSheet, TouchableOpacity, TextInput,
 } from 'react-native';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; //  useLocation??
 import loginService from '../services/login';
-
-const getInitialLoginState = () => {
-  if (useLocation().state !== null) {
-    return useLocation().state.isLogin;
-  }
-  return false;
-};
 
 const imageBackground = require('../public/images/login-background.png');
 
@@ -19,20 +12,9 @@ function LoginScreen() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [hin, setHIN] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [role, setRole] = useState('');
 
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState('');
-  const initialLogin = getInitialLoginState();
-  const [isLogin, setIsLogin] = useState(initialLogin);
-
-  const onChange = () => {
-    setIsLogin(!isLogin);
-    setMessage('');
-  };
 
   const onSubmit = async (event) => {
     // for <form>s
@@ -40,30 +22,23 @@ function LoginScreen() {
     try {
       const payload = {
         email,
-        firstName,
-        lastName,
-        hin,
         password,
-        role,
       };
 
       // Get response from axios
-      const response = isLogin
-        ? await loginService.login(payload)
-        : await loginService.register(payload);
+      const response = await loginService.login(payload);
       if (response.status === 200) {
         setIsError(false);
-        if (isLogin) {
-          navigate('/dashboard', { state: { name: response.data.firstName, role: response.data.role } });
-        } else {
-          setMessage('Thank you for registering.');
-          setIsLogin(true);
-        }
+        navigate('/dashboard', { state: { name: response.data.firstName, role: response.data.role } });
       }
     } catch (exception) {
       setIsError(true);
       setMessage('Error: Wrong Credentials');
     }
+  };
+
+  const onChange = () => {
+    navigate('/');
   };
 
   const getMessage = () => message;
@@ -148,21 +123,17 @@ function LoginScreen() {
   return (
     <ImageBackground source={imageBackground} style={styles.image}>
       <View style={styles.card}>
-        <Text style={styles.heading}>{isLogin ? 'Login' : 'Signup'}</Text>
+        <Text style={styles.heading}>Login</Text>
         <View style={styles.form}>
           <View style={styles.inputs}>
             <TextInput style={styles.input} placeholder="Email" autoCapitalize="none" onChangeText={setEmail} />
-            {!isLogin && <TextInput style={styles.input} placeholder="First Name" onChangeText={setFirstName} />}
-            {!isLogin && <TextInput style={styles.input} placeholder="Last Name" onChangeText={setLastName} />}
             <TextInput secureTextEntry style={styles.input} placeholder="Password" onChangeText={setPassword} />
-            {!isLogin && <TextInput style={styles.input} placeholder="Health Insurance Number" onChangeText={setHIN} />}
-            {!isLogin && <TextInput style={styles.input} placeholder="Role" onChangeText={setRole} />}
             <Text style={[styles.message, { color: isError ? 'red' : 'green' }]}>{message ? getMessage() : null}</Text>
             <TouchableOpacity style={styles.button} onPress={onSubmit}>
               <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonAlt} onPress={onChange}>
-              <Text style={styles.buttonAltText}>{isLogin ? 'Sign Up' : 'Log In'}</Text>
+              <Text style={styles.buttonAltText}>Back</Text>
             </TouchableOpacity>
           </View>
         </View>

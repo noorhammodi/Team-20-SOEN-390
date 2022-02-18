@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import { toBeInTheDocument } from '@testing-library/jest-dom';
@@ -13,16 +13,8 @@ function MockLogin() {
   );
 }
 
-it("should have initial title 'Signup'", async () => {
+it("should have initial title 'Login'", async () => {
   render(<MockLogin />);
-  const title = screen.getByText(/signup/i);
-  expect(title).toBeInTheDocument();
-});
-
-it("should have changed title 'Login'", async () => {
-  render(<MockLogin />);
-  const submitButton = screen.getByText(/sign up|log in/i);
-  fireEvent.click(submitButton);
   const title = screen.getByText(/login/i);
   expect(title).toBeInTheDocument();
 });

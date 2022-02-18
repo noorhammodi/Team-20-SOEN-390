@@ -71,7 +71,6 @@ function LoginScreen() {
       <div>
         <TextField
           id="filled-basic"
-          label="Email"
           defaultValue="Email"
           InputProps={{
             startAdornment: (
@@ -85,7 +84,6 @@ function LoginScreen() {
       <div>
         <TextField
           id="filled-password-input"
-          label="Password"
           type="password"
           defaultValue="Password"
           autoComplete="current-password"

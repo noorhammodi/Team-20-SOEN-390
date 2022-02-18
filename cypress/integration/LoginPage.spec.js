@@ -4,7 +4,8 @@ describe('Navigation', () => {
   it('Can visit homepage', () => {
     cy.visit('/');
     cy.contains('JeVaisBienAller');
-    cy.contains('Log In');
-    cy.contains('Sign Up');
+    cy.contains('LOGIN');
+    cy.contains('FORGOT PASSWORD?');
+    cy.contains('CREATE NEW ACCOUNT');
   });
 });

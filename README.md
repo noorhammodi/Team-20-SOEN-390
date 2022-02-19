@@ -22,7 +22,6 @@ You can run the development server this way (or use `npm run dev:build`):
 ```
 npm run build (build the static frontend)
 npm run dev
-
 ```
 
 Make sure you are running the development server by checking that your database is `jevaisbienaller-dev`. It will be displayed in the console.

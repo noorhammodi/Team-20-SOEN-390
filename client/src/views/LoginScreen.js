@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; //  useLocation??
 
 import {
+  Box,
   Paper,
   Button,
   Typography,
@@ -17,6 +18,7 @@ import PasswordIcon from '@mui/icons-material/Password';
 import CreateIcon from '@mui/icons-material/Create';
 
 import loginService from '../services/login';
+import Logo from '../components/Logo';
 
 function LoginScreen() {
   const navigate = useNavigate();
@@ -48,7 +50,7 @@ function LoginScreen() {
     }
   };
 
-  const handleBack = () => {
+  const handleSignUp = () => {
     navigate('/register');
   };
 
@@ -58,60 +60,103 @@ function LoginScreen() {
 
   const renderErrorMessage = () => {
     if (isError) {
-      return <Typography>{getMessage()}</Typography>;
+      return (
+        <Box>
+          <Paper
+            sx={{ p: 0.75 }}
+          >
+            <Typography
+              color="error"
+              align="center"
+            >
+              {getMessage()}
+            </Typography>
+          </Paper>
+          <br />
+        </Box>
+      );
     }
     return '';
   };
 
   return (
-    <Paper>
-      <Typography variant="h3">
-        JeVaisBienAller
-      </Typography>
-      <div>
-        <TextField
-          id="filled-basic"
-          defaultValue="Email"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <EmailIcon />
-              </InputAdornment>),
-          }}
-          onChange={handleEmailChange}
-        />
-      </div>
-      <div>
-        <TextField
-          id="filled-password-input"
-          type="password"
-          defaultValue="Password"
-          autoComplete="current-password"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <PasswordIcon />
-              </InputAdornment>),
-          }}
-          onChange={handlePasswordChange}
-        />
-      </div>
-      <div>{renderErrorMessage()}</div>
-      <div>
-        <Button variant="contained" startIcon={<LoginIcon />} onClick={handleSubmit}>
-          LOGIN
-        </Button>
-      </div>
-      <div>
-        <Typography> FORGOT PASSWORD? </Typography>
-      </div>
-      <Divider />
-      <div>
-        <Button variant="outlined" startIcon={<CreateIcon />} onClick={handleBack}>
-          CREATE NEW ACCOUNT
-        </Button>
-      </div>
-    </Paper>
+    <Box>
+      <Logo type="extend" />
+      <br />
+      <Paper
+        sx={{ p: 2 }}
+      >
+        <br />
+        <Box>
+          <TextField
+            id="filled-basic"
+            placeholder="Email"
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <EmailIcon />
+                </InputAdornment>),
+            }}
+            onChange={handleEmailChange}
+          />
+        </Box>
+        <br />
+        <Box>
+          <TextField
+            id="filled-password-input"
+            type="password"
+            placeholder="Password"
+            autoComplete="current-password"
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PasswordIcon />
+                </InputAdornment>),
+            }}
+            onChange={handlePasswordChange}
+          />
+        </Box>
+        <br />
+        <Box>{renderErrorMessage()}</Box>
+        <Box>
+          <Button
+            variant="contained"
+            startIcon={<LoginIcon />}
+            onClick={handleSubmit}
+            fullWidth
+          >
+            LOGIN
+          </Button>
+        </Box>
+        <br />
+        <Box
+          textAlign="center"
+        >
+          <Typography
+            color="secondary"
+          >
+            FORGOT PASSWORD?
+          </Typography>
+        </Box>
+        <br />
+        <Divider />
+        <br />
+        <Box
+          textAlign="center"
+        >
+          <Button
+            variant="contained"
+            startIcon={<CreateIcon />}
+            onClick={handleSignUp}
+          >
+            CREATE NEW ACCOUNT
+          </Button>
+        </Box>
+        <br />
+      </Paper>
+    </Box>
   );
 }
 

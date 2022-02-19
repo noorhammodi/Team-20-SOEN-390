@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import {
-  Paper,
+  Box,
+  Container,
   Typography,
 } from '@mui/material';
 
@@ -20,23 +21,23 @@ function Dashboard() {
   const getMessage = () => message;
 
   return (
-    <Paper>
-      <div>
+    <Container>
+      <Box>
         <Typography variant="h3">
           JeVaisBienAller
         </Typography>
-      </div>
-      <div>
+      </Box>
+      <Box>
         <Typography variant="h4">
           Dashboard
         </Typography>
-      </div>
-      <div>
+      </Box>
+      <Box>
         <Typography>
           {getMessage()}
         </Typography>
-      </div>
-    </Paper>
+      </Box>
+    </Container>
   );
 }
 

@@ -21,6 +21,9 @@ import {
 import Logo from '../components/Logo';
 import registerService from '../services/register';
 import RegisterRole from '../components/register/RegisterRole';
+import RegisterUserInfo from '../components/register/RegisterUserInfo';
+import RegisterCredentials from '../components/register/RegisterCredentials';
+import Success from '../components/register/Success';
 
 const imageBackground = require('../public/images/login-background.png');
 
@@ -28,15 +31,24 @@ function RegisterScreen() {
   const navigate = useNavigate();
 
   const [step, setStep] = useState(1);
-  const [role, setRole] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [hin, setHIN] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [inputs, setInputs] = useState({
+    role: '',
+    firstName: '',
+    lastName: '',
+    hin: '',
+    email: '',
+    password: '',
+  });
 
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState('');
+
+  const changeHandle = (e) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   // Proceed to next step
   const nextStep = () => {
@@ -48,22 +60,15 @@ function RegisterScreen() {
     setStep(step - 1);
   };
 
-  // Handle state
-  const handleChange = (input, event) => {
-    // input = event.target.value;
-  };
+  // Handle Role
 
   const onSubmit = async (event) => {
     // for <form>s
     event.preventDefault();
+    console.log(inputs);
     try {
       const payload = {
-        email,
-        firstName,
-        lastName,
-        hin,
-        password,
-        role,
+        ...inputs,
       };
 
       // Get response from axios
@@ -71,7 +76,7 @@ function RegisterScreen() {
       if (response.status === 200) {
         setIsError(false);
         setMessage('Thank you for registering.');
-        navigate('/login');
+        navigate('/');
       }
     } catch (exception) {
       setIsError(true);
@@ -80,12 +85,7 @@ function RegisterScreen() {
   };
 
   const values = {
-    role,
-    firstName,
-    lastName,
-    hin,
-    email,
-    password,
+    ...inputs,
   };
 
   switch (step) {
@@ -100,7 +100,7 @@ function RegisterScreen() {
             <br />
             <RegisterRole
               nextStep={nextStep}
-              handleChange={handleChange}
+              handleChange={changeHandle}
               values={values}
             />
             <br />
@@ -116,9 +116,9 @@ function RegisterScreen() {
             sx={{ p: 2 }}
           >
             <br />
-            <RegisterRole
+            <RegisterUserInfo
               nextStep={nextStep}
-              handleChange={handleChange}
+              handleChange={changeHandle}
               values={values}
             />
             <br />
@@ -134,9 +134,9 @@ function RegisterScreen() {
             sx={{ p: 2 }}
           >
             <br />
-            <RegisterRole
+            <RegisterCredentials
               nextStep={nextStep}
-              handleChange={handleChange}
+              handleChange={changeHandle}
               values={values}
             />
             <br />
@@ -152,9 +152,9 @@ function RegisterScreen() {
             sx={{ p: 2 }}
           >
             <br />
-            <RegisterRole
+            <Success
               nextStep={nextStep}
-              handleChange={handleChange}
+              onSubmit={onSubmit}
               values={values}
             />
             <br />
@@ -162,23 +162,8 @@ function RegisterScreen() {
         </Box>
       );
     case 5:
-      return (
-        <Box>
-          <Logo type="extend" />
-          <br />
-          <Paper
-            sx={{ p: 2 }}
-          >
-            <br />
-            <RegisterRole
-              nextStep={nextStep}
-              handleChange={handleChange}
-              values={values}
-            />
-            <br />
-          </Paper>
-        </Box>
-      );
+      navigate('/');
+      break;
     default:
   }
 }

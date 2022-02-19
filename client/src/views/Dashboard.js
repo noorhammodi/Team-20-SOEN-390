@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import {
-  ImageBackground, View, Text, StyleSheet,
-} from 'react-native';
 import { useLocation } from 'react-router-dom';
+
+import {
+  Box,
+  Container,
+  Typography,
+} from '@mui/material';
 
 const getInitialNameState = () => {
   if (useLocation().state !== null) {
@@ -11,99 +14,30 @@ const getInitialNameState = () => {
   return { name: 'N/A', role: 'N/A' };
 };
 
-const imageBackground = require('../public/images/login-background.png');
-
 function Dashboard() {
   const { name, role } = getInitialNameState();
-
-  const styles = StyleSheet.create({
-    image: {
-      flex: 1,
-      width: '100%',
-      alignItems: 'center',
-      paddingBottom: '10%',
-    },
-    card: {
-      flex: 1,
-      backgroundColor: 'rgba(255, 255, 255, 0.4)',
-      width: '80%',
-      marginTop: '10%',
-      borderRadius: 20,
-      paddingBottom: '10%',
-    },
-    heading: {
-      fontSize: 30,
-      fontWeight: 'bold',
-      marginLeft: '10%',
-      marginTop: '5%',
-      color: 'black',
-    },
-    form: {
-      flex: 1,
-      justifyContent: 'space-between',
-      paddingBottom: '5%',
-    },
-    inputs: {
-      width: '100%',
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingTop: '10%',
-    },
-    input: {
-      width: '80%',
-      borderBottomWidth: 1,
-      borderBottomColor: 'black',
-      paddingLeft: '1%',
-      fontSize: 16,
-      minHeight: 40,
-      borderRadius: 5,
-    },
-    button: {
-      width: '80%',
-      backgroundColor: 'black',
-      height: 40,
-      borderRadius: 50,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginVertical: 5,
-    },
-    buttonText: {
-      color: 'white',
-      fontSize: 16,
-      fontWeight: '400',
-    },
-    buttonAlt: {
-      width: '80%',
-      borderWidth: 1,
-      height: 40,
-      borderRadius: 50,
-      borderColor: 'black',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginVertical: 5,
-    },
-    buttonAltText: {
-      color: 'black',
-      fontSize: 16,
-      fontWeight: '400',
-    },
-    message: {
-      fontSize: 16,
-    },
-  });
 
   const [message] = useState(`Welcome ${name}. Your role is ${role}.`);
   const getMessage = () => message;
 
   return (
-    <ImageBackground source={imageBackground} style={styles.image}>
-      <View style={styles.card}>
-        <Text style={styles.heading}>Dashboard</Text>
-        <Text style={styles.message}>{getMessage()}</Text>
-
-      </View>
-    </ImageBackground>
+    <Container>
+      <Box>
+        <Typography variant="h3">
+          JeVaisBienAller
+        </Typography>
+      </Box>
+      <Box>
+        <Typography variant="h4">
+          Dashboard
+        </Typography>
+      </Box>
+      <Box>
+        <Typography>
+          {getMessage()}
+        </Typography>
+      </Box>
+    </Container>
   );
 }
 

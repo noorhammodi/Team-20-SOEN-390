@@ -8,6 +8,8 @@ import LoginScreen from './views/LoginScreen';
 import RegisterScreen from './views/RegisterScreen';
 import Dashboard from './views/Dashboard';
 
+import MultiStepForm from './views/components/MultiStepForm';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -25,6 +27,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
+          <Route path="/r" element={<MultiStepForm />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>

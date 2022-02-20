@@ -9,6 +9,7 @@ import {
   TextInput,
 } from 'react-native';
 import { useNavigate } from 'react-router-dom'; // useLocation??
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {
   Box,
   Paper,
@@ -17,7 +18,9 @@ import {
   TextField,
   Divider,
   InputAdornment,
+  Stepper, Step, StepLabel,
 } from '@mui/material';
+
 import Logo from '../components/Logo';
 import registerService from '../services/register';
 import RegisterRole from '../components/register/RegisterRole';
@@ -30,7 +33,6 @@ const imageBackground = require('../public/images/login-background.png');
 function RegisterScreen() {
   const navigate = useNavigate();
 
-  const [step, setStep] = useState(1);
   const [inputs, setInputs] = useState({
     role: '',
     firstName: '',
@@ -50,18 +52,7 @@ function RegisterScreen() {
     });
   };
 
-  // Proceed to next step
-  const nextStep = () => {
-    setStep(step + 1);
-  };
-
-  // Proceed to last step
-  const prevStep = () => {
-    setStep(step - 1);
-  };
-
   // Handle Role
-
   const onSubmit = async (event) => {
     // for <form>s
     event.preventDefault();
@@ -88,84 +79,94 @@ function RegisterScreen() {
     ...inputs,
   };
 
-  switch (step) {
-    case 1:
-      return (
-        <Box>
-          <Logo type="extend" />
-          <br />
-          <Paper
-            sx={{ p: 2 }}
-          >
-            <br />
-            <RegisterRole
-              nextStep={nextStep}
-              handleChange={changeHandle}
-              values={values}
-            />
-            <br />
-          </Paper>
-        </Box>
-      );
-    case 2:
-      return (
-        <Box>
-          <Logo type="extend" />
-          <br />
-          <Paper
-            sx={{ p: 2 }}
-          >
-            <br />
-            <RegisterUserInfo
-              nextStep={nextStep}
-              handleChange={changeHandle}
-              values={values}
-            />
-            <br />
-          </Paper>
-        </Box>
-      );
-    case 3:
-      return (
-        <Box>
-          <Logo type="extend" />
-          <br />
-          <Paper
-            sx={{ p: 2 }}
-          >
-            <br />
-            <RegisterCredentials
-              nextStep={nextStep}
-              handleChange={changeHandle}
-              values={values}
-            />
-            <br />
-          </Paper>
-        </Box>
-      );
-    case 4:
-      return (
-        <Box>
-          <Logo type="extend" />
-          <br />
-          <Paper
-            sx={{ p: 2 }}
-          >
-            <br />
-            <Success
-              nextStep={nextStep}
-              onSubmit={onSubmit}
-              values={values}
-            />
-            <br />
-          </Paper>
-        </Box>
-      );
-    case 5:
-      navigate('/');
-      break;
-    default:
+  const [step, setStep] = useState(0);
+
+  // Proceed to next step
+  const nextStep = () => {
+    setStep((previousStep) => previousStep + 1);
+  };
+
+  // Proceed to last step
+  const prevStep = () => {
+    setStep((previousStep) => previousStep - 1);
+  };
+
+  function getSteps() {
+    return ['ROLE', 'INFO', 'LOGIN', 'VERIFY'];
   }
+
+  const steps = getSteps();
+
+  function getStepContent(s) {
+    switch (s) {
+      case 0:
+        return (
+          <RegisterRole
+            nextStep={nextStep}
+            handleChange={changeHandle}
+            values={values}
+          />
+        );
+      case 1:
+        return (
+          <RegisterUserInfo
+            dataFromParent={inputs.role.value}
+            nextStep={nextStep}
+            handleChange={changeHandle}
+            values={values}
+          />
+        );
+      case 2:
+        return (
+          <RegisterCredentials
+            nextStep={nextStep}
+            handleChange={changeHandle}
+            values={values}
+          />
+        );
+      case 3:
+        return (
+          <Success
+            nextStep={nextStep}
+            onSubmit={onSubmit}
+            values={values}
+          />
+        );
+      default:
+        return navigate('/');
+    }
+  }
+
+  return (
+    <Box>
+      <Logo type="extend" />
+      <br />
+      <Paper
+        sx={{ p: 2 }}
+      >
+        <br />
+        <Stepper activeStep={step} alternativeLabel>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>
+                {label}
+              </StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        {step === steps.length ? 'Completed' : (
+          <>
+            {getStepContent(step)}
+            <br />
+            <Button onClick={prevStep} variant="contained">
+              BACK
+            </Button>
+          </>
+        )}
+        <br />
+      </Paper>
+    </Box>
+  );
 }
 
 export default RegisterScreen;

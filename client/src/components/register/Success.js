@@ -16,13 +16,13 @@ function Success(props) {
           color="secondary"
           textAlign="center"
         >
-          SUCCESS!
+          VERIFY YOUR INFORMATION!
         </Typography>
         <br />
         <Typography
           color="primary"
         >
-          HERE ARE YOUR ACCOUNT DETAILS
+          ACCOUNT DETAILS:
         </Typography>
         <br />
         <Box>

@@ -6,7 +6,7 @@ import {
   Button,
 } from '@mui/material';
 
-function RegisterUserInfo(props) {
+function RegisterUserInfo(props, dataFromParent) {
   const { nextStep, handleChange } = props;
 
   const handleNext = () => {
@@ -43,7 +43,7 @@ function RegisterUserInfo(props) {
         <Box>
           <TextField
             id="filled-basic"
-            placeholder="Health Insurance Number"
+            placeholder={{ dataFromParent } === 'doctor' ? 'MINC' : 'Health Insurance Number'}
             name="hin"
             onChange={handleChange}
             fullWidth

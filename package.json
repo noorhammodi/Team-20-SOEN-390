@@ -11,7 +11,7 @@
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand --watch",
     "test:only": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "build": "cd ./client && npm install && CI=false npm run build",
-    "build:all": "npm install && cd ./client && npm install && npm run build",
+    "build:all": "npm install && cd ./client && npm install && CI=false npm run build",
     "dev:build": "npm run build && npm run dev",
     "start:build": "npm run build && npm run start",
     "start:test": "cross-env NODE_ENV=test node ./bin/www",

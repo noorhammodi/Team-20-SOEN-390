@@ -10,7 +10,7 @@
     "dev": "cross-env NODE_ENV=development nodemon -L ./bin/www --ignore client --exec \"npm run lint:fix && node\"",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand --watch",
     "test:only": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "build": "cd ./client && npm install && npm run build",
+    "build": "cd ./client && npm install && CI=false npm run build",
     "build:all": "npm install && cd ./client && npm install && npm run build",
     "dev:build": "npm run build && npm run dev",
     "start:build": "npm run build && npm run start",

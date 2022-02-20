@@ -3,15 +3,14 @@ import {
   Box,
   Typography,
   TextField,
-  Button,
+  InputAdornment,
 } from '@mui/material';
 
-function RegisterCredentials(props) {
-  const { nextStep, handleChange } = props;
+import EmailIcon from '@mui/icons-material/Email';
+import PasswordIcon from '@mui/icons-material/Password';
 
-  const handleNext = () => {
-    nextStep();
-  };
+function RegisterCredentials(props) {
+  const { handleChange } = props;
 
   return (
     <div>
@@ -24,7 +23,6 @@ function RegisterCredentials(props) {
           CREATE LOGIN CREDENTIALS
         </Typography>
         <br />
-        <br />
         <Box>
           <TextField
             id="filled-basic"
@@ -32,27 +30,32 @@ function RegisterCredentials(props) {
             name="email"
             onChange={handleChange}
             fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <EmailIcon />
+                </InputAdornment>),
+            }}
           />
+
         </Box>
         <br />
         <Box>
           <TextField
-            id="filled-basic"
+            id="filled-password-input"
+            type="password"
             placeholder="Password"
+            autoComplete="current-password"
             name="password"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PasswordIcon />
+                </InputAdornment>),
+            }}
             onChange={handleChange}
             fullWidth
           />
-        </Box>
-        <br />
-        <br />
-        <Box>
-          <Button
-            variant="contained"
-            onClick={handleNext}
-          >
-            Next
-          </Button>
         </Box>
       </Box>
     </div>

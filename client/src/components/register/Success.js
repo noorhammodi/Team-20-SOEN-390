@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-trailing-spaces */
 import React from 'react';
 import {
@@ -29,37 +30,31 @@ function Success(props) {
           <Typography
             color="primary"
           >
-            First Name: 
-            {values.firstName}
+            First Name: {values.firstName}
           </Typography>
           <Typography
             color="primary"
           >
-            Last Name: 
-            {values.lastName}
+            Last Name: {values.lastName}
           </Typography>
           <Typography
             color="primary"
           >
-            HIN: 
-            {values.hin}
+            HIN: {values.hin}
           </Typography>
           <Typography
             color="primary"
           >
-            Email: 
-            {values.email}
+            Email: {values.email}
           </Typography>
           <Typography
             color="primary"
           >
-            Role: 
-            {values.role}
+            Role: {values.role}
           </Typography>
         </Box>
-        <br />
-        <br />
         <Box>
+          <br />
           <Button
             variant="contained"
             onClick={onSubmit}

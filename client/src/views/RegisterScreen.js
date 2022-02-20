@@ -56,7 +56,6 @@ function RegisterScreen() {
   const onSubmit = async (event) => {
     // for <form>s
     event.preventDefault();
-    console.log(inputs);
     try {
       const payload = {
         ...inputs,
@@ -154,15 +153,35 @@ function RegisterScreen() {
             </Step>
           ))}
         </Stepper>
+        <br />
         {step === steps.length ? 'Completed' : (
           <>
             {getStepContent(step)}
-            <br />
-            <Button onClick={prevStep} variant="contained">
-              BACK
-            </Button>
           </>
         )}
+        <Box
+          textAlign="center"
+        >
+          <br />
+          <Button
+            sx={{ m: 1 }}
+            variant="outlined"
+            onClick={prevStep}
+          >
+            BACK
+          </Button>
+          {step < steps.length - 1
+            ? (
+              <Button
+                sx={{ m: 1 }}
+                variant="contained"
+                onClick={nextStep}
+              >
+                Next
+              </Button>
+            )
+            : ''}
+        </Box>
         <br />
       </Paper>
     </Box>

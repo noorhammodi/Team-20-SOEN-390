@@ -7,15 +7,10 @@ import {
   Radio,
   FormControl,
   FormLabel,
-  Button,
 } from '@mui/material';
 
 function RegisterRole(props) {
-  const { nextStep, handleChange } = props;
-
-  const handleNext = () => {
-    nextStep();
-  };
+  const { handleChange } = props;
 
   return (
     <div>
@@ -28,9 +23,8 @@ function RegisterRole(props) {
           SELECT YOUR ROLE
         </Typography>
         <br />
-        <br />
         <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+          <FormLabel id="demo-radio-buttons-group-label" />
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="patient"
@@ -41,14 +35,6 @@ function RegisterRole(props) {
             <FormControlLabel value="doctor" control={<Radio />} label="Doctor" />
           </RadioGroup>
         </FormControl>
-        <Box>
-          <Button
-            variant="contained"
-            onClick={handleNext}
-          >
-            Next
-          </Button>
-        </Box>
       </Box>
     </div>
   );

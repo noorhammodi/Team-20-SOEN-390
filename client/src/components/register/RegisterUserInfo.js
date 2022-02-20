@@ -3,15 +3,10 @@ import {
   Box,
   Typography,
   TextField,
-  Button,
 } from '@mui/material';
 
 function RegisterUserInfo(props, dataFromParent) {
-  const { nextStep, handleChange } = props;
-
-  const handleNext = () => {
-    nextStep();
-  };
+  const { handleChange } = props;
 
   return (
     <div>
@@ -21,9 +16,10 @@ function RegisterUserInfo(props, dataFromParent) {
         <Typography
           color="secondary"
         >
-          COMPLETE YOUR PERSONAL INFORMATION
+          COMPLETE YOUR PERSONAL
+          <br />
+          INFORMATION
         </Typography>
-        <br />
         <br />
         <Box>
           <TextField
@@ -43,21 +39,12 @@ function RegisterUserInfo(props, dataFromParent) {
         <Box>
           <TextField
             id="filled-basic"
+            // eslint-disable-next-line no-constant-condition
             placeholder={{ dataFromParent } === 'doctor' ? 'MINC' : 'Health Insurance Number'}
             name="hin"
             onChange={handleChange}
             fullWidth
           />
-        </Box>
-        <br />
-        <br />
-        <Box>
-          <Button
-            variant="contained"
-            onClick={handleNext}
-          >
-            Next
-          </Button>
         </Box>
       </Box>
     </div>

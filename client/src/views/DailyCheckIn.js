@@ -28,35 +28,35 @@ function DailyCheckIn() {
               <Checkbox />
             }
           >
-            <ListItemText sx={{ 'padding-left': '5%' }} primary="Fever or chills" />
+            <ListItemText sx={{ paddingLeft: '5%' }} primary="Fever or chills" />
           </ListItem>
           <ListItem
             secondaryAction={
               <Checkbox />
             }
           >
-            <ListItemText sx={{ 'padding-left': '5%' }} primary="Sudden loss of sense of smell and taste" />
+            <ListItemText sx={{ paddingLeft: '5%' }} primary="Sudden loss of sense of smell and taste" />
           </ListItem>
           <ListItem
             secondaryAction={
               <Checkbox />
             }
           >
-            <ListItemText sx={{ 'padding-left': '5%' }} primary="Difficulty breathing or shortness of breath" />
+            <ListItemText sx={{ paddingLeft: '5%' }} primary="Difficulty breathing or shortness of breath" />
           </ListItem>
           <ListItem
             secondaryAction={
               <Checkbox />
             }
           >
-            <ListItemText sx={{ 'padding-left': '5%' }} primary="Cough (new or worsening)" />
+            <ListItemText sx={{ paddingLeft: '5%' }} primary="Cough (new or worsening)" />
           </ListItem>
           <ListItem
             secondaryAction={
               <Checkbox />
             }
           >
-            <ListItemText sx={{ 'padding-left': '5%' }} primary="Runny or stuffy nose (of unknown cause)" />
+            <ListItemText sx={{ paddingLeft: '5%' }} primary="Runny or stuffy nose (of unknown cause)" />
           </ListItem>
         </List>
         <Divider />
@@ -85,35 +85,35 @@ function DailyCheckIn() {
               <Checkbox />
             }
           >
-            <ListItemText sx={{ 'padding-left': '5%' }} primary="Unusual severe fatigue, for no obvious reason" />
+            <ListItemText sx={{ paddingLeft: '5%' }} primary="Unusual severe fatigue, for no obvious reason" />
           </ListItem>
           <ListItem
             secondaryAction={
               <Checkbox />
             }
           >
-            <ListItemText sx={{ 'padding-left': '5%' }} primary="Unusual headache" />
+            <ListItemText sx={{ paddingLeft: '5%' }} primary="Unusual headache" />
           </ListItem>
           <ListItem
             secondaryAction={
               <Checkbox />
             }
           >
-            <ListItemText sx={{ 'padding-left': '5%' }} primary="Significant loss of appetite" />
+            <ListItemText sx={{ paddingLeft: '5%' }} primary="Significant loss of appetite" />
           </ListItem>
           <ListItem
             secondaryAction={
               <Checkbox />
             }
           >
-            <ListItemText sx={{ 'padding-left': '5%' }} primary="Unusual or unexplained muscle pain or stiffness (not related to physical activity)" />
+            <ListItemText sx={{ paddingLeft: '5%' }} primary="Unusual or unexplained muscle pain or stiffness (not related to physical activity)" />
           </ListItem>
           <ListItem
             secondaryAction={
               <Checkbox />
             }
           >
-            <ListItemText sx={{ 'padding-left': '5%' }} primary="Sore throat without obvious cause  " />
+            <ListItemText sx={{ paddingLeft: '5%' }} primary="Sore throat without obvious cause  " />
           </ListItem>
         </List>
       </List>

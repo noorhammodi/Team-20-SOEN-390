@@ -30,3 +30,8 @@ describe('REST API request on /api/forms', () => {
       .expect(200);
   });
 });
+
+// Close mongoose connection from supertest(app)
+afterAll(() => {
+  mongoose.connection.close();
+});

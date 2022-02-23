@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { useLocation } from 'react-router-dom';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 // import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
-import MuiAppBar from '@mui/material/AppBar';
+// import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -17,73 +18,35 @@ import Button from '@mui/material/Button';
 import { blue } from '@mui/material/colors';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 // import DashboardIcon from '@mui/icons-material/Dashboard';
-import LogoutIcon from '@mui/icons-material/Logout';
+// import LogoutIcon from '@mui/icons-material/Logout';
 // import MenuBookIcon from '@mui/icons-material/MenuBook';
-import logoo from './BellLogo (1).png';
+// import logoo from '../components/images/BellLogo.png';
+import Navbar from '../components/Navbar';
 
+const getInitialNameState = () => {
+  if (useLocation().state !== null) {
+    return { name: useLocation().state.name, role: useLocation().state.role };
+  }
+  return { name: 'N/A', role: 'N/A' };
+};
 function DashboardContent() {
   const primary = blue;
-
-  const drawerWidth = 250;
-
-  const AppBar = styled(MuiAppBar, {
-
-    shouldForwardProp: (prop) => prop !== 'open',
-  })(({ theme, open }) => ({
-    zIndex: theme.zIndex.drawer + 1,
-
-    ...(open && {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-
-    }),
-  }));
-
+  const { name } = getInitialNameState();
+  const welcomeMessage = `Hello, ${name}`;
   const mdTheme = createTheme();
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(1),
+
     textAlign: 'center',
   }));
   // console.log(logo);
-
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
-
         <CssBaseline />
-        <AppBar position="absolute" style={{ background: '#FFF' }}>
-          <Toolbar
-            sx={{
-              pr: '24px', // keep right padding when drawer closed
-            }}
-
-          >
-
-            <img src={logoo} alt="Logo" width="60" height="60" />
-            <Typography
-              component="h1"
-              variant="h4"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-              style={{ color: '#00296B' }}
-            >
-              JeVaisBienAller
-              <br />
-
-              <Typography style={{ color: '#FDC500' }}>Covid tracker </Typography>
-            </Typography>
-
-            <Button variant="contained" style={{ color: '#00296B' }}>
-              <LogoutIcon style={{ color: '#FFFFFF' }}>  </LogoutIcon>
-              <Typography style={{ color: '#FFFFFF' }}>Logout </Typography>
-            </Button>
-          </Toolbar>
-
-        </AppBar>
-
+        <Navbar />
         <Box
           component="main"
           sx={{
@@ -94,18 +57,21 @@ function DashboardContent() {
             height: '100vh',
             overflow: 'auto',
           }}
-
         >
-
           <Toolbar />
-          <h1 style={{ color: '#00296B' }}>Hello, Sarah</h1>
-
+          <Typography variant="h2" style={{ color: '#00296B' }}>
+            {welcomeMessage}
+          </Typography>
           <Container maxWidth="lg" sx={{ mt: 10, mb: 6 }}>
             <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 6 }}>
               <Grid item xs={6} sm={6} height={200}>
                 <Item sx={{ boxShadow: 10 }}>
                   <h1 style={{ color: '#00296B' }}> Your Condition</h1>
-                  <Divider style={{ background: '#00296B' }} variant="middle" sx={{ borderBottomWidth: 4 }} />
+                  <Divider
+                    style={{ background: '#00296B' }}
+                    variant="middle"
+                    sx={{ borderBottomWidth: 4 }}
+                  />
                   <br />
                   <br />
                   <br />
@@ -121,13 +87,16 @@ function DashboardContent() {
               <Grid item xs={6} color={primary}>
                 <Item sx={{ boxShadow: 10 }}>
                   <h1 style={{ color: '#00296B' }}>Your Appointments</h1>
-                  <Divider style={{ background: '#00296B' }} variant="middle" sx={{ borderBottomWidth: 4 }} />
+                  <Divider
+                    style={{ background: '#00296B' }}
+                    variant="middle"
+                    sx={{ borderBottomWidth: 4 }}
+                  />
                   <br />
                   <br />
                   <br />
                   <br />
                   <br />
-
                   <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }}>
                     <Typography style={{ color: '#FFFFFF' }}>Next </Typography>
                     <NavigateNextIcon style={{ color: '#FFFFFF' }} />
@@ -137,7 +106,11 @@ function DashboardContent() {
               <Grid item xs={6}>
                 <Item sx={{ boxShadow: 10 }}>
                   <h1 style={{ color: '#00296B' }}>Track Your Location</h1>
-                  <Divider style={{ background: '#00296B' }} variant="middle" sx={{ borderBottomWidth: 4 }} />
+                  <Divider
+                    style={{ background: '#00296B' }}
+                    variant="middle"
+                    sx={{ borderBottomWidth: 4 }}
+                  />
                   <br />
                   <br />
                   <br />
@@ -152,7 +125,12 @@ function DashboardContent() {
               <Grid item xs={6}>
                 <Item sx={{ boxShadow: 10 }}>
                   <h1 style={{ color: '#00296B' }}> Vaccination Status</h1>
-                  <Divider style={{ background: '#00296B' }} variant="middle" sx={{ borderBottomWidth: 4 }} />
+
+                  <Divider
+                    style={{ background: '#00296B' }}
+                    variant="middle"
+                    sx={{ borderBottomWidth: 4 }}
+                  />
                   <br />
                   <br />
                   <br />
@@ -163,18 +141,14 @@ function DashboardContent() {
                     <NavigateNextIcon style={{ color: '#FFFFFF' }} />
                   </Button>
                 </Item>
-
               </Grid>
             </Grid>
-
           </Container>
         </Box>
       </Box>
-
     </ThemeProvider>
   );
 }
-
 export default function Dashboard() {
   return <DashboardContent />;
 }

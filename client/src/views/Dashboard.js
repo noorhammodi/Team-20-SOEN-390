@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import {
   Box,
+  Button,
   Container,
   Typography,
 } from '@mui/material';
@@ -15,10 +16,15 @@ const getInitialNameState = () => {
 };
 
 function Dashboard() {
+  const navigate = useNavigate();
   const { name, role } = getInitialNameState();
 
   const [message] = useState(`Welcome ${name}. Your role is ${role}.`);
   const getMessage = () => message;
+
+  const handleCheckIn = () => {
+    navigate('/checkIn');
+  };
 
   return (
     <Container>
@@ -36,6 +42,14 @@ function Dashboard() {
         <Typography>
           {getMessage()}
         </Typography>
+      </Box>
+      <Box>
+        <Button
+          variant="contained"
+          onClick={handleCheckIn}
+        >
+          FILL UP DAILY CHECK IN
+        </Button>
       </Box>
     </Container>
   );

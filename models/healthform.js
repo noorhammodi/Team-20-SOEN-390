@@ -39,7 +39,7 @@ const healthFormSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  significantLossOfApetite: {
+  significantLossOfAppetite: {
     type: Boolean,
     required: true,
   },
@@ -57,6 +57,6 @@ const healthFormSchema = new mongoose.Schema({
 healthFormSchema.plugin(uniqueValidator);
 
 // Make a model with the schema and mongoose credentials
-const HealthForm = mongoose.model('User', healthFormSchema);
+const HealthForm = mongoose.model('HealthForm', healthFormSchema);
 
 module.exports = HealthForm;

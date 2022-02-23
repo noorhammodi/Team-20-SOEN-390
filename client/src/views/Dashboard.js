@@ -1,16 +1,5 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-
-import {
-  Box,
-  Button,
-  Container,
-  Typography,
-} from '@mui/material';
-=======
 import * as React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 // import MuiDrawer from '@mui/material/Drawer';
@@ -33,7 +22,6 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 // import MenuBookIcon from '@mui/icons-material/MenuBook';
 // import logoo from '../components/images/BellLogo.png';
 import Navbar from '../components/Navbar';
->>>>>>> 25967012e193c2d0a6873e64f3fe5d8121d94efb
 
 const getInitialNameState = () => {
   if (useLocation().state !== null) {
@@ -42,6 +30,10 @@ const getInitialNameState = () => {
   return { name: 'N/A', role: 'N/A' };
 };
 function DashboardContent() {
+  const navigate = useNavigate();
+  const goCheckIn = () => {
+    navigate('/checkIn');
+  };
   const primary = blue;
   const { name } = getInitialNameState();
   const welcomeMessage = `Hello, ${name}`;
@@ -51,23 +43,9 @@ function DashboardContent() {
     ...theme.typography.body2,
     padding: theme.spacing(1),
 
-<<<<<<< HEAD
-function Dashboard() {
-  const navigate = useNavigate();
-  const { name, role } = getInitialNameState();
-
-  const [message] = useState(`Welcome ${name}. Your role is ${role}.`);
-  const getMessage = () => message;
-
-  const handleCheckIn = () => {
-    navigate('/checkIn');
-  };
-
-=======
     textAlign: 'center',
   }));
   // console.log(logo);
->>>>>>> 25967012e193c2d0a6873e64f3fe5d8121d94efb
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -104,7 +82,7 @@ function Dashboard() {
                   <br />
                   <br />
 
-                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }}>
+                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }} onClick={goCheckIn}>
                     <Typography style={{ color: '#FFFFFF' }}>Next </Typography>
                     <NavigateNextIcon style={{ color: '#FFFFFF' }} />
                   </Button>
@@ -172,29 +150,7 @@ function Dashboard() {
           </Container>
         </Box>
       </Box>
-<<<<<<< HEAD
-      <Box>
-        <Typography variant="h4">
-          Dashboard
-        </Typography>
-      </Box>
-      <Box>
-        <Typography>
-          {getMessage()}
-        </Typography>
-      </Box>
-      <Box>
-        <Button
-          variant="contained"
-          onClick={handleCheckIn}
-        >
-          FILL UP DAILY CHECK IN
-        </Button>
-      </Box>
-    </Container>
-=======
     </ThemeProvider>
->>>>>>> 25967012e193c2d0a6873e64f3fe5d8121d94efb
   );
 }
 export default function Dashboard() {

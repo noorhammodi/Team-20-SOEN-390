@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 // import MuiDrawer from '@mui/material/Drawer';
@@ -30,6 +30,10 @@ const getInitialNameState = () => {
   return { name: 'N/A', role: 'N/A' };
 };
 function DashboardContent() {
+  const navigate = useNavigate();
+  const goCheckIn = () => {
+    navigate('/checkIn');
+  };
   const primary = blue;
   const { name } = getInitialNameState();
   const welcomeMessage = `Hello, ${name}`;
@@ -78,7 +82,7 @@ function DashboardContent() {
                   <br />
                   <br />
 
-                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }}>
+                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }} onClick={goCheckIn}>
                     <Typography style={{ color: '#FFFFFF' }}>Next </Typography>
                     <NavigateNextIcon style={{ color: '#FFFFFF' }} />
                   </Button>

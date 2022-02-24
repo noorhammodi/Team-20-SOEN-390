@@ -7,6 +7,10 @@ const healthFormSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  temperature: {
+    type: Number,
+    required: false,
+  },
   suddenLossOfSenseOfSmellAndTaste: {
     type: Boolean,
     required: true,

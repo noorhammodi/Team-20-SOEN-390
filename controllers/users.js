@@ -63,8 +63,7 @@ usersRouter.post('/new', async (request, response) => {
 
     const s = await doc.save();
   }
-  
-  
+
   // Send the payload via mongoose, wait for response then return it
   await user.save();
   response.json('User saved');

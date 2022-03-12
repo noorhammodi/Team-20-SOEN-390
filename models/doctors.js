@@ -7,9 +7,9 @@ const doctorsSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
-  patients:{
-    type:[String]
-  }
+  patients: {
+    type: [String],
+  },
 
 });
 

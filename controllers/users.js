@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 
 const usersRouter = express.Router();
 const User = require('../models/user');
+const Doctor = require('../models/doctors');
 const config = require('../utils/config');
 
 // Gets a list of users (does not work in prod)
@@ -54,6 +55,16 @@ usersRouter.post('/new', async (request, response) => {
     associated_users: body.associated_users,
   });
 
+  if (body.role === 'doctor') {
+    const doc = new Doctor({
+      email: body.email,
+      patients: [],
+    });
+
+    const s = await doc.save();
+  }
+  
+  
   // Send the payload via mongoose, wait for response then return it
   await user.save();
   response.json('User saved');

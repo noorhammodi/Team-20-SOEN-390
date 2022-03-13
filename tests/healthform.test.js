@@ -9,6 +9,7 @@ const api = supertest(app);
 
 const TEST_HEALTHFORM1 = {
   feverOrChills: false,
+  temperature: 0,
   suddenLossOfSenseOfSmellAndTaste: false,
   difficultyBreathingOrShortnessOfBreath: true,
   cough: false,
@@ -24,6 +25,7 @@ const TEST_HEALTHFORM1 = {
 
 const TEST_HEALTHFORM2 = {
   feverOrChills: true,
+  temperature: 0,
   suddenLossOfSenseOfSmellAndTaste: false,
   difficultyBreathingOrShortnessOfBreath: true,
   cough: false,

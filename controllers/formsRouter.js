@@ -10,7 +10,7 @@ formsRouter.post('/healthform', async (request, response) => {
   // Get request.body and put it in new var body
   const { body } = request;
 
-  if (Object.keys(body).length === 12 && body.feverOrChills === false) {
+  if (Object.keys(body).length === 13 && body.feverOrChills === false) {
     // Using body, set new payload
     const healthform = new HealthForm({
       feverOrChills: body.feverOrChills,

@@ -79,18 +79,18 @@ describe('REST API request on /api/forms/healthform', () => {
       .expect(200);
   });
 
-  test('POST /api/forms/healthform with feverOrChills being true and temperature not being included is not successful', async () => {
+  test('POST /api/forms/healthform with feverOrChills being true and temperature not being included is successful but temperature is not taken in the database', async () => {
     await api
       .post('/api/forms/healthform')
       .send(TEST_HEALTHFORM2)
-      .expect(422);
+      .expect(200);
   });
 
-  test('POST /api/forms/healthform with feverOrChills being false and temperature being included is not successful', async () => {
+  test('POST /api/forms/healthform with feverOrChills being false and temperature being included is successful but temperature are not taken in the database', async () => {
     await api
       .post('/api/forms/healthform')
       .send(TEST_HEALTHFORM3)
-      .expect(422);
+      .expect(200);
   });
 
   test('POST /api/forms/healthform with feverOrChills being true and temperature being included is successful', async () => {

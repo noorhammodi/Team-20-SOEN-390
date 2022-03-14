@@ -60,9 +60,10 @@ usersRouter.post('/new', async (request, response) => {
 });
 
 // Deletes user (does not work in prod)
-usersRouter.delete('/', async (request, response) => {
+usersRouter.delete('/:id', async (request, response) => {
   if (config.env.isDev() || config.env.isTest()) {
-    await User.deleteMany({});
+    const { id } = request.params;
+    await User.findByIdAndDelete(id);
     response.status(204).end();
   } else {
     // Unauthorized

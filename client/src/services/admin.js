@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 import axios from 'axios';
 import config from '../utils/config';
 
@@ -15,9 +16,15 @@ const getAll = async () => {
   return response;
 };
 
+const deleteUser = async (id) => {
+  const response = await axiosService.delete(getUsers + '/' + id);
+  return response;
+};
+
 // For export
 const adminService = {
   getAll,
+  deleteUser,
 };
 
 export default adminService;

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginScreen from './views/LoginScreen';
 import RegisterScreen from './views/RegisterScreen';
 import Dashboard from './views/Dashboard';
+import DoctorDashboard from './views/DoctorDashboard';
 import DailyCheckIn from './views/DailyCheckIn';
 
 // React-Native (will be deleted)
@@ -40,6 +41,7 @@ function App() {
             {/* <Route path="/" element={<HomePage />} /> */}
             <Route path="/" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
+            <Route path="/doctorDashboard" element={<DoctorDashboard/>} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/checkIn" element={<DailyCheckIn />} />
           </Routes>

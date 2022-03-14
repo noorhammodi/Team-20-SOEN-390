@@ -1,17 +1,19 @@
 const express = require('express');
 
 const addPatientRouter = express.Router();
-const bcrypt = require('bcrypt');
+
 const jwt = require('jsonwebtoken');
 
 const doc = require('../models/doctors');
 
-addPatientRouter.post('/', async (req, res, next) => {
+addPatientRouter.post('/', async (req) => {
   const { body } = req;
 
-  const decoded = await jwt.verify(body.auth, process.env.ACCESS_TOKEN_SECRET, (err, token) => token);
+  const pros = process.env.ACCESS_TOKEN_SECRET;
 
-  if (decoded.role == 'doctor') {
+  const decoded = await jwt.verify(body.auth, pros, (err, token) => token);
+
+  if (decoded.role === 'doctor') {
     const doctorEmail = decoded.email;
     console.log(doctorEmail);
 

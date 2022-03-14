@@ -61,7 +61,7 @@ usersRouter.post('/new', async (request, response) => {
       patients: [],
     });
 
-    const s = await doc.save();
+    await doc.save();
   }
 
   // Send the payload via mongoose, wait for response then return it

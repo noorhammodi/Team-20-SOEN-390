@@ -42,6 +42,9 @@ function LoginScreen() {
       const response = await loginService.login(payload);
       if (response.status === 200) {
         setIsError(false);
+        if(response.data.role==="doctor"){
+          navigate('/dashboard', { state: { name: response.data.firstName, role: response.data.role } });
+        }
         navigate('/dashboard', { state: { name: response.data.firstName, role: response.data.role } });
       }
     } catch (exception) {

@@ -146,6 +146,26 @@ function DashboardContent() {
                   </Button>
                 </Item>
               </Grid>
+              <Grid item xs={6}>
+                <Item sx={{ boxShadow: 10 }}>
+                  <h1 style={{ color: '#00296B' }}>Chat</h1>
+
+                  <Divider
+                    style={{ background: '#00296B' }}
+                    variant="middle"
+                    sx={{ borderBottomWidth: 4 }}
+                  />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }}>
+                    <Typography style={{ color: '#FFFFFF' }}>Next</Typography>
+                    <NavigateNextIcon style={{ color: '#FFFFFF' }} />
+                  </Button>
+                </Item>
+              </Grid>
             </Grid>
           </Container>
         </Box>

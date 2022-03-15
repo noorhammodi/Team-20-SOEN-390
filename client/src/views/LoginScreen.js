@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import jwt_decode from "jwt-decode";
 
 import { useNavigate } from 'react-router-dom'; //  useLocation??
 
@@ -17,7 +18,8 @@ import EmailIcon from '@mui/icons-material/Email';
 import PasswordIcon from '@mui/icons-material/Password';
 import CreateIcon from '@mui/icons-material/Create';
 
-import loginService from '../services/login';
+import loginService from '../services/newLogin';
+import doctorLoginService from '../services/doctorLogin';
 import Logo from '../components/Logo';
 
 function LoginScreen() {
@@ -42,10 +44,21 @@ function LoginScreen() {
       const response = await loginService.login(payload);
       if (response.status === 200) {
         setIsError(false);
-        if(response.data.role==="doctor"){
-          navigate('/dashboard', { state: { name: response.data.firstName, role: response.data.role } });
+        var token = response.data
+        var decodedtoken= jwt_decode(token)
+        var s= JSON.stringify(decodedtoken);
+        
+        if(decodedtoken.role === "doctor"){
+          var pay={"auth": token}
+          const doctorResponse = await doctorLoginService.login(pay);
+          var u= JSON.stringify(doctorResponse.data);
+
+        navigate('/doctorDashboard', { state: { name: u, role:"jkjkj"} });
+
         }
-        navigate('/dashboard', { state: { name: response.data.firstName, role: response.data.role } });
+        else{
+        navigate('/dashboard', { state: { name: s, role: s } });
+      }
       }
     } catch (exception) {
       setIsError(true);

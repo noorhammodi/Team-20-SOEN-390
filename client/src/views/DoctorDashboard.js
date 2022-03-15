@@ -22,4 +22,136 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 // import MenuBookIcon from '@mui/icons-material/MenuBook';
 // import logoo from '../components/images/BellLogo.png';
 import Navbar from '../components/Navbar';
+const getInitialNameState = () => {
+    if (useLocation().state !== null) {
+      return { name: useLocation().state.name, role: useLocation().state.role };
+    }
+    return { name: 'N/A', role: 'N/A' };
+  };
+function DashboardContent() {
+  const navigate = useNavigate();
+  const goCheckIn = () => {
+    navigate('/checkIn');
+  };
+  const primary = blue;
+  const { name } = getInitialNameState();
+  const welcomeMessage = `Hello, ${name}`;
+  const mdTheme = createTheme();
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
 
+    textAlign: 'center',
+  }));
+  // console.log(logo);
+  return (
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <Navbar />
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) => (theme.palette.mode === 'light'
+              ? theme.palette.white
+              : theme.palette.white),
+            flexGrow: 1,
+            height: '100vh',
+            overflow: 'auto',
+          }}
+        >
+          <Toolbar />
+          <Typography variant="h2" style={{ color: '#00296B' }}>
+            {welcomeMessage}
+          </Typography>
+          <Container maxWidth="lg" sx={{ mt: 10, mb: 6 }}>
+            <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 6 }}>
+              <Grid item xs={6} sm={6} height={200}>
+                <Item sx={{ boxShadow: 10 }}>
+                  <h1 style={{ color: '#00296B' }}> Your Condition</h1>
+                  <Divider
+                    style={{ background: '#00296B' }}
+                    variant="middle"
+                    sx={{ borderBottomWidth: 4 }}
+                  />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+
+                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }} onClick={goCheckIn}>
+                    <Typography style={{ color: '#FFFFFF' }}>Next </Typography>
+                    <NavigateNextIcon style={{ color: '#FFFFFF' }} />
+                  </Button>
+                </Item>
+              </Grid>
+              <Grid item xs={6} color={primary}>
+                <Item sx={{ boxShadow: 10 }}>
+                  <h1 style={{ color: '#00296B' }}>Your Appointments</h1>
+                  <Divider
+                    style={{ background: '#00296B' }}
+                    variant="middle"
+                    sx={{ borderBottomWidth: 4 }}
+                  />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }}>
+                    <Typography style={{ color: '#FFFFFF' }}>Next </Typography>
+                    <NavigateNextIcon style={{ color: '#FFFFFF' }} />
+                  </Button>
+                </Item>
+              </Grid>
+              <Grid item xs={6}>
+                <Item sx={{ boxShadow: 10 }}>
+                  <h1 style={{ color: '#00296B' }}>Track Your Location</h1>
+                  <Divider
+                    style={{ background: '#00296B' }}
+                    variant="middle"
+                    sx={{ borderBottomWidth: 4 }}
+                  />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }}>
+                    <Typography style={{ color: '#FFFFFF' }}>Next </Typography>
+                    <NavigateNextIcon style={{ color: '#FFFFFF' }} />
+                  </Button>
+                </Item>
+              </Grid>
+              <Grid item xs={6}>
+                <Item sx={{ boxShadow: 10 }}>
+                  <h1 style={{ color: '#00296B' }}> Vaccination Status</h1>
+
+                  <Divider
+                    style={{ background: '#00296B' }}
+                    variant="middle"
+                    sx={{ borderBottomWidth: 4 }}
+                  />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }}>
+                    <Typography style={{ color: '#FFFFFF' }}>Next </Typography>
+                    <NavigateNextIcon style={{ color: '#FFFFFF' }} />
+                  </Button>
+                </Item>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+      </Box>
+    </ThemeProvider>
+  );
+}
+export default function doctorDashboard() {
+  return <DashboardContent />;
+}

@@ -22,7 +22,7 @@ import {
 } from '@mui/material';
 
 import Logo from '../components/Logo';
-import registerService from '../services/register';
+import registerService from '../services/newRegister';
 import RegisterRole from '../components/register/RegisterRole';
 import RegisterUserInfo from '../components/register/RegisterUserInfo';
 import RegisterCredentials from '../components/register/RegisterCredentials';

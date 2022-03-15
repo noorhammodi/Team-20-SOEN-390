@@ -55,6 +55,12 @@ const healthFormSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  hin: {
+    type: String,
+    required: true,
+    trim: true,
+    unique: true,
+  },
 });
 
 // Bind uniqueValidator to schema

@@ -64,6 +64,7 @@ loginRouter.post('/new', async (request, response) => {
 
   // creating the jw token
   const jtoken = jwt.sign(claim, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2h' });
+  console.log(jtoken);
 
   // OK 200
   return response.status(200).json(jtoken);

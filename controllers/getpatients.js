@@ -1,12 +1,14 @@
 const express = require('express');
 
-const addPatientRouter = express.Router();
+const getPatientRouter = express.Router();
 
 const jwt = require('jsonwebtoken');
 
 const doc = require('../models/doctors');
+const dil = require('../models/user');
 
-addPatientRouter.post('/', async (req) => {
+/* eslint-disable */ 
+getPatientRouter.post('/', async (req, res) => {
   const { body } = req;
 
   const pros = process.env.ACCESS_TOKEN_SECRET;
@@ -17,7 +19,7 @@ addPatientRouter.post('/', async (req) => {
     const doctorEmail = decoded.email;
     console.log(doctorEmail);
 
-    const patientEmail = body.patient;
+    // const patientEmail = body.patient;
 
     const docc = await doc.findOne({
       email: doctorEmail,
@@ -26,20 +28,10 @@ addPatientRouter.post('/', async (req) => {
 
     const patientslist = docc.patients;
 
-    patientslist.push(patientEmail);
-
-    doc.updateOne(
-      { email: doctorEmail },
-      { patients: patientslist },
-      (err, docs) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('Updated Docs : ', docs);
-        }
-      },
-    );
+    const records = await dil.find().where('email').in(patientslist).exec();
+    console.log(records)
+    return res.status(200).json(records);
   }
 });
 
-module.exports = addPatientRouter;
+module.exports = getPatientRouter;

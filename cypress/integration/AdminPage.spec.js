@@ -2,6 +2,8 @@
 
 const usersHelper = require('../../tests/helperUsers');
 
+const { TEST_PATIENT1 } = usersHelper.testPatients;
+const { TEST_DOCTOR1 } = usersHelper.testDoctors;
 const { TEST_ADMIN1 } = usersHelper.testAdmins;
 
 describe('Test Admin Page', () => {
@@ -9,11 +11,29 @@ describe('Test Admin Page', () => {
     // Delete all previous users
     cy.request('DELETE', '/api/users');
 
-    // Create TEST_PATIENT1
+    // Create TEST_ADMIN1
     cy.request(
       'POST',
       '/api/users',
       TEST_ADMIN1,
+    ).then((response) => {
+      expect(response.status).to.eq(200);
+    });
+
+    // Add a Test Patient
+    cy.request(
+      'POST',
+      '/api/users',
+      TEST_PATIENT1,
+    ).then((response) => {
+      expect(response.status).to.eq(200);
+    });
+
+    // Add a Test Doctor
+    cy.request(
+      'POST',
+      '/api/users',
+      TEST_DOCTOR1,
     ).then((response) => {
       expect(response.status).to.eq(200);
     });

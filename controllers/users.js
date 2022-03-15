@@ -59,20 +59,6 @@ usersRouter.post('/new', async (request, response) => {
   response.json('User saved');
 });
 
-// Deletes user (does not work in prod)
-usersRouter.delete('/:id', async (request, response) => {
-  if (config.env.isDev() || config.env.isTest()) {
-    const { id } = request.params;
-    await User.findByIdAndDelete(id);
-    response.status(204).end();
-  } else {
-    // Unauthorized
-    response.status(401).json({
-      error: 'Unauthorized operation',
-    });
-  }
-});
-
 // Get (the information of) a particular user.
 usersRouter.get('/:id', async (request, response) => {
   const { id } = request.params;
@@ -115,6 +101,19 @@ usersRouter.delete('/:id', async (request, response) => {
 
   await User.findByIdAndDelete(id);
   response.status(204).end();
+});
+
+// Deletes all users (does not work in prod, required for testing)
+usersRouter.delete('/', async (request, response) => {
+  if (config.env.isDev() || config.env.isTest()) {
+    await User.deleteMany({});
+    response.status(204).end();
+  } else {
+    // Unauthorized
+    response.status(401).json({
+      error: 'Unauthorized operation',
+    });
+  }
 });
 
 module.exports = usersRouter;

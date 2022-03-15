@@ -131,6 +131,6 @@ describe('REST API request on /api/forms/healthform', () => {
 afterAll(async () => {
   await api
     .delete('/api/forms/healthform')
-    .expect(200);
+    .expect(204);
   mongoose.connection.close();
 });

@@ -22,7 +22,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 // import MenuBookIcon from '@mui/icons-material/MenuBook';
 // import logoo from '../components/images/BellLogo.png';
 import Navbar from '../components/Navbar';
-import TransitionsModal from '../components/chat/ChatContainer';
+import ChatContainerModal from '../components/chat/ChatContainerModal';
 
 const getInitialNameState = () => {
   if (useLocation().state !== null) {
@@ -48,6 +48,7 @@ function DashboardContent() {
   }));
   // console.log(logo);
 
+  // These are the states that control the T
   const [openChatModal, setOpenChatModal] = React.useState(false);
   const handleOpenChatModal = () => setOpenChatModal(true);
   const handleCloseChatModal = () => setOpenChatModal(false);
@@ -170,7 +171,7 @@ function DashboardContent() {
                     <Typography style={{ color: '#FFFFFF' }}>Next</Typography>
                     <NavigateNextIcon style={{ color: '#FFFFFF' }} />
                   </Button>
-                  <TransitionsModal handleClose={handleCloseChatModal} open={openChatModal} />
+                  <ChatContainerModal handleClose={handleCloseChatModal} open={openChatModal} />
                 </Item>
               </Grid>
             </Grid>

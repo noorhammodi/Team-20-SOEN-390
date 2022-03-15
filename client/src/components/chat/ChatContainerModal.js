@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-function TransitionsModal({ handleClose, open }) {
+function ChatContainerModal({ handleClose, open }) {
   return (
     <div>
       <Modal
@@ -46,4 +46,4 @@ function TransitionsModal({ handleClose, open }) {
   );
 }
 
-export default TransitionsModal;
+export default ChatContainerModal;

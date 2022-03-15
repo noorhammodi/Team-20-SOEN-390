@@ -22,6 +22,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 // import MenuBookIcon from '@mui/icons-material/MenuBook';
 // import logoo from '../components/images/BellLogo.png';
 import Navbar from '../components/Navbar';
+import TransitionsModal from '../components/chat/ChatContainer';
 
 const getInitialNameState = () => {
   if (useLocation().state !== null) {
@@ -46,6 +47,11 @@ function DashboardContent() {
     textAlign: 'center',
   }));
   // console.log(logo);
+
+  const [openChatModal, setOpenChatModal] = React.useState(false);
+  const handleOpenChatModal = () => setOpenChatModal(true);
+  const handleCloseChatModal = () => setOpenChatModal(false);
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -160,13 +166,15 @@ function DashboardContent() {
                   <br />
                   <br />
                   <br />
-                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }}>
+                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }} onClick={handleOpenChatModal}>
                     <Typography style={{ color: '#FFFFFF' }}>Next</Typography>
                     <NavigateNextIcon style={{ color: '#FFFFFF' }} />
                   </Button>
+                  <TransitionsModal handleClose={handleCloseChatModal} open={openChatModal} />
                 </Item>
               </Grid>
             </Grid>
+
           </Container>
         </Box>
       </Box>

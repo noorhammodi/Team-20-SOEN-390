@@ -2,7 +2,7 @@
 
 const usersHelper = require('../../tests/helperUsers');
 
-const { TEST_PATIENT1 } = usersHelper.testPatients;
+const { TEST_ADMIN1 } = usersHelper.testAdmins;
 
 describe('Test Admin Page', () => {
   beforeEach(() => {
@@ -13,7 +13,7 @@ describe('Test Admin Page', () => {
     cy.request(
       'POST',
       '/api/users',
-      TEST_PATIENT1,
+      TEST_ADMIN1,
     ).then((response) => {
       expect(response.status).to.eq(200);
     });
@@ -26,11 +26,11 @@ describe('Test Admin Page', () => {
     cy.contains('FORGOT PASSWORD?');
     cy.contains('CREATE NEW ACCOUNT');
 
-    cy.get('input[name="email-field"]').type(TEST_PATIENT1.email);
-    cy.get('input[name="password-field"]').type(TEST_PATIENT1.password);
+    cy.get('input[name="email-field"]').type(TEST_ADMIN1.email);
+    cy.get('input[name="password-field"]').type(TEST_ADMIN1.password);
 
     cy.get('button[name="login-button"').click();
 
-    cy.contains(TEST_PATIENT1.firstName);
+    cy.contains(TEST_ADMIN1.firstName);
   });
 });

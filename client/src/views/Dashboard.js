@@ -48,7 +48,7 @@ function DashboardContent() {
   }));
   // console.log(logo);
 
-  // These are the states that control the T
+  // These are the states that control the ChatContainerModal visibility
   const [openChatModal, setOpenChatModal] = React.useState(false);
   const handleOpenChatModal = () => setOpenChatModal(true);
   const handleCloseChatModal = () => setOpenChatModal(false);

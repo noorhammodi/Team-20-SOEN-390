@@ -22,6 +22,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 // import MenuBookIcon from '@mui/icons-material/MenuBook';
 // import logoo from '../components/images/BellLogo.png';
 import Navbar from '../components/Navbar';
+import authService from '../services/auth';
 
 const getInitialNameState = () => {
   if (useLocation().state !== null) {
@@ -29,6 +30,17 @@ const getInitialNameState = () => {
   }
   return { name: 'N/A', role: 'N/A' };
 };
+
+const isAuthenticated = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await authService.validate(token);
+    return response.data.auth;
+  } catch (exception) {
+    return false;
+  }
+};
+
 function DashboardContent() {
   const navigate = useNavigate();
   const goCheckIn = () => {
@@ -49,6 +61,10 @@ function DashboardContent() {
     textAlign: 'center',
   }));
   // console.log(logo);
+
+  if (!isAuthenticated()) {
+    return navigate('/');
+  }
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>

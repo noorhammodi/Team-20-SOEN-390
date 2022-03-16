@@ -1,22 +1,15 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+import {
+  Paper, Divider, Container, Grid, Button, Typography, List, ListItem, ListItemText, ListItemAvatar,
+} from '@mui/material/';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import 'react-circular-progressbar/dist/styles.css';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
 import map1 from './images/location-tracking-gps.jpg';
 
 export default function Patientboard() {

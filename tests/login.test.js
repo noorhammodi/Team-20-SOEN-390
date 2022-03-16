@@ -83,7 +83,6 @@ describe('JWT Token: REST API requests on /api/login (expects test users to be a
     const userId = await usersHelper.getUserId(TEST_PATIENT1);
 
     const claim = { id: userId };
-    console.log(claim);
     const jtoken = jwt.sign(claim, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2h' });
 
     // Checking the response body

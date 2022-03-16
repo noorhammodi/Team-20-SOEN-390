@@ -29,8 +29,6 @@ loginRouter.post('/', async (request, response) => {
   // generating the JWT token
   const tokenJWT = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2h' }, {});
 
-  console.log(tokenPayload);
-
   const responsePayload = {
     auth: true,
     token: tokenJWT,

@@ -39,7 +39,7 @@ describe('Test Admin Page', () => {
     });
   });
 
-  it('Can login with proper user', () => {
+  it('Can use admin dashboard', () => {
     cy.visit('/');
     cy.contains('JeVaisBienAller');
     cy.contains('LOGIN');
@@ -55,5 +55,11 @@ describe('Test Admin Page', () => {
     cy.contains('See Users');
 
     cy.get('button[name="admin-button"]').click({ force: true });
+
+    // On the admin dashboard
+    cy.contains(TEST_PATIENT1.firstName);
+    cy.get('button[name="delete-button-0"]').click();
+
+    cy.contains(TEST_PATIENT1.firstName).should('not.exist');
   });
 });

@@ -1,14 +1,9 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-// import MuiDrawer from '@mui/material/Drawer';
-import Box from '@mui/material/Box';
-// import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
+import {
+  CssBaseline, Box, Toolbar, Typography, Avatar, Stack,
+} from '@mui/material/';
 import Sidebar from '../components/Sidebar';
 import Patientboard from '../components/patientboard';
 import user1 from '../components/images/user1.jpg';

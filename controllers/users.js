@@ -9,7 +9,6 @@ const config = require('../utils/config');
 usersRouter.put('/:id/add_associated_user', async (request, response) => {
   const parentuser = await User.findById(request.params.id);
   console.log(parentuser);
-  // const childuser = request.body;
 
   const childfilter = { hin: request.body.hin };
   const childupdate = {
@@ -21,22 +20,11 @@ usersRouter.put('/:id/add_associated_user', async (request, response) => {
 
   const parentfilter = { _id: request.params.id };
   const parentupdate = {
-    // eslint-disable-next-line max-len
-    // parentuser.associated_users.push(foundChildUser)
-    associated_users: parentuser.associated_users, // request.body.associated_users,
+    associated_users: parentuser.associated_users,
   };
 
   const foundParentUser = await User.findOneAndUpdate(parentfilter, parentupdate, { new: true });
   response.json(foundParentUser);
-
-  // const yo = response.json(parentuser);
-  // yo.associated_users.push();
-
-  // const hashedpassword = await bcrypt.hash(request.body.password, 10);
-
-  // Update and return the new object
-  // { new: true } is a parameter to return the new object
-  // otherwise it returns the original object.
 });
 
 // Gets a list of users (does not work in prod)

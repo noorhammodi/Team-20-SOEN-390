@@ -36,6 +36,8 @@ function DashboardContent() {
   };
   const goListUsers = () => {
     navigate('/listUsers');
+  const goHistorySymptoms = () => {
+    navigate('/historySymptoms');
   };
   const primary = blue;
   const { name } = getInitialNameState();
@@ -93,9 +95,13 @@ function DashboardContent() {
                   <br />
                   <br />
                   <br />
+                  <Button variant="contained" style={{ bottom: 3, left: 0, color: '#00296B' }} onClick={goHistorySymptoms}>
+                    <Typography style={{ color: '#FFFFFF' }}>History </Typography>
+                    <NavigateNextIcon style={{ color: '#FFFFFF' }} />
+                  </Button>
 
-                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }} onClick={goCheckIn}>
-                    <Typography style={{ color: '#FFFFFF' }}>Next </Typography>
+                  <Button variant="contained" style={{ bottom: 3, left: 125, color: '#00296B' }} onClick={goCheckIn}>
+                    <Typography style={{ color: '#FFFFFF' }}>Submit </Typography>
                     <NavigateNextIcon style={{ color: '#FFFFFF' }} />
                   </Button>
                 </Item>

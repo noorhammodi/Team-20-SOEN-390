@@ -25,21 +25,34 @@ import Navbar from '../components/Navbar';
 
 const getInitialNameState = () => {
   if (useLocation().state !== null) {
-    return { name: useLocation().state.name, role: useLocation().state.role };
+    return {
+      name: useLocation().state.name,
+      role: useLocation().state.role,
+    };
   }
   return { name: 'N/A', role: 'N/A' };
 };
+const getInitialHINState = () => {
+  if (useLocation().state !== null) {
+    return {
+      hin: useLocation().state.hin,
+    };
+  }
+  return { hin: '0' };
+};
 
 function DashboardContent() {
+  const { hin } = getInitialHINState();
+  const sendHIN = hin;
   const navigate = useNavigate();
   const goCheckIn = () => {
-    navigate('/checkIn');
+    navigate('/checkIn', { state: { hin: sendHIN } });
   };
   const goListUsers = () => {
     navigate('/listUsers');
   };
   const goHistorySymptoms = () => {
-    navigate('/historySymptoms');
+    navigate('/historySymptoms', { state: { hin: sendHIN } });
   };
   const primary = blue;
   const { name } = getInitialNameState();

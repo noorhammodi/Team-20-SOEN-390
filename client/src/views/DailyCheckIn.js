@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Button,
   Checkbox,
@@ -11,6 +11,15 @@ import {
 } from '@mui/material';
 import checkInService from '../services/checkIn';
 import Navbar from '../components/Navbar';
+
+const getInitialHINState = () => {
+  if (useLocation().state !== null) {
+    return {
+      hin: useLocation().state.hin,
+    };
+  }
+  return { hin: '0' };
+};
 
 function DailyCheckIn() {
   const navigate = useNavigate();
@@ -27,7 +36,8 @@ function DailyCheckIn() {
   const [significantLossOfAppetite, setLossOAappetite] = useState(false);
   const [unusualOrUnexplainedMusclePainOrStiffness, setMusclePain] = useState(false);
   const [soreThroatWithoutObviousCause, setSoreThroat] = useState(false);
-  const hin = 'z';
+  const { hin } = getInitialHINState();
+
   const handleFeverChange = ({ target }) => setFever(target.checked);
   const handleTemperatureChange = ({ target }) => setTemperature(target.value);
   const handleLossOfSmellAndTasteChange = ({ target }) => setLossOfSmellAndTaste(target.checked);

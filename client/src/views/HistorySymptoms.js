@@ -1,4 +1,5 @@
 import React from 'react';
+// import { useLocation } from 'react-router-dom';
 import {
   Box,
   List,
@@ -7,8 +8,32 @@ import {
 
 import Navbar from '../components/Navbar';
 import SymptomModal from '../components/historySymptoms/SymptomModal';
+/* import historyService from '../services/historySymptom';
+
+const getInitialHINState = () => {
+  if (useLocation().state !== null) {
+    return {
+      hin: useLocation().state.hin,
+    };
+  }
+  return { hin: '0' };
+}; */
 
 function HistorySymptoms() {
+  /* const { hin } = getInitialHINState();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getHistory();
+  }, []);
+
+  async function getHistory() {
+    await historyService.getList(hin).then((response) => {
+      setData(response.data);
+    }).catch((error) => {
+      console.error('Error' + error);
+    });
+  } */
+
   return (
     <>
       <Navbar />

@@ -36,6 +36,9 @@ loginRouter.post('/', async (request, response) => {
     profile: {
       firstName: user.firstName,
       role: user.role,
+      // eslint-disable-next-line no-underscore-dangle
+      id: user.__id,
+      hin: user.hin,
     },
   };
 

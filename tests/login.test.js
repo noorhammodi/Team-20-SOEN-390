@@ -15,7 +15,7 @@ const { TEST_DOCTOR1 } = usersHelper.testDoctors;
 const nonHashedPassword = TEST_PATIENT1.password;
 
 describe('OLD: REST API requests on /api/login (expects test users to be added)', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     // Clean the test database first
     await User.deleteMany({});
 
@@ -59,7 +59,7 @@ describe('OLD: REST API requests on /api/login (expects test users to be added)'
 });
 
 describe('JWT Token: REST API requests on /api/login (expects test users to be added)', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     // Clean the test database first
     await User.deleteMany({});
     TEST_PATIENT1.password = await bcrypt.hash(TEST_PATIENT1.password, 10);
@@ -83,6 +83,7 @@ describe('JWT Token: REST API requests on /api/login (expects test users to be a
     const userId = await usersHelper.getUserId(TEST_PATIENT1);
 
     const claim = { id: userId };
+    console.log(claim);
     const jtoken = jwt.sign(claim, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2h' });
 
     // Checking the response body

@@ -49,8 +49,11 @@ describe('Test Admin Page', () => {
     cy.get('input[name="email-field"]').type(TEST_ADMIN1.email);
     cy.get('input[name="password-field"]').type(TEST_ADMIN1.password);
 
-    cy.get('button[name="login-button"').click();
+    cy.get('button[name="login-button"]').click();
 
     cy.contains(TEST_ADMIN1.firstName);
+    cy.contains('See Users');
+
+    cy.get('button[name="admin-button"]').click({ force: true });
   });
 });

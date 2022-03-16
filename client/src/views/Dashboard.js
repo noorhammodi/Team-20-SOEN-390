@@ -71,7 +71,7 @@ function DashboardContent() {
           </Typography>
           {getInitialNameState().role === 'admin'
             ? (
-              <Button variant="contained" style={{ bottom: 3, color: '#00296B' }} onClick={goListUsers}>
+              <Button name="admin-button" variant="contained" style={{ bottom: 3, color: '#00296B' }} onClick={goListUsers}>
                 <Typography style={{ color: '#FFFFFF' }}>See Users </Typography>
                 <NavigateNextIcon style={{ color: '#FFFFFF' }} />
               </Button>

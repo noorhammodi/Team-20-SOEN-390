@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const supertest = require('supertest');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
 const app = require('../app');
 const User = require('../models/user');
 const usersHelper = require('./helperUsers');
@@ -12,7 +12,7 @@ const api = supertest(app);
 // Get predefined test users from usersHelper
 const { TEST_PATIENT1, TEST_PATIENT2 } = usersHelper.testPatients;
 const { TEST_DOCTOR1 } = usersHelper.testDoctors;
-const nonHashedPassword = TEST_PATIENT1.password;
+// const nonHashedPasswrd = TEST_PATIENT1.password;
 
 describe('OLD: REST API requests on /api/login (expects test users to be added)', () => {
   beforeAll(async () => {

@@ -23,8 +23,7 @@ loginRouter.post('/', async (request, response) => {
   }
 
   const tokenPayload = {
-    email: user.email,
-    role: user.role,
+    id: user.id,
   };
 
   // generating the JWT token

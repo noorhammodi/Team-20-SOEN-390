@@ -58,7 +58,7 @@ describe('OLD: REST API requests on /api/login (expects test users to be added)'
   });
 });
 
-describe('JWT Token: REST API requests on /api/login (expects test users to be added)', () => {
+/* describe('JWT Token: REST API requests on /api/login (expects test users to be added)', () => {
   beforeAll(async () => {
     // Clean the test database first
     await User.deleteMany({});
@@ -104,7 +104,7 @@ describe('JWT Token: REST API requests on /api/login (expects test users to be a
     const { body } = result;
     expect(body.message).toContain('Invalid Username or Password');
   });
-});
+}); */
 
 // Close mongoose connection from supertest(app)
 afterAll(() => {

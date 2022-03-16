@@ -1,3 +1,5 @@
+const User = require('../models/user');
+
 const testPatients = {
   TEST_PATIENT1: {
     email: 'testpatient1@gmail.com',
@@ -42,8 +44,16 @@ const testAdmins = {
   },
 };
 
+const getUserId = async (userJson) => {
+  const user = await User.findOne({ email: userJson.email });
+
+  // eslint-disable-next-line no-underscore-dangle
+  return user.id;
+};
+
 module.exports = {
   testPatients,
   testDoctors,
   testAdmins,
+  getUserId,
 };

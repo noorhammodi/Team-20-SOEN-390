@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const supertest = require('supertest');
-// const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const app = require('../app');
 const User = require('../models/user');
 const usersHelper = require('./helperUsers');
@@ -12,7 +12,7 @@ const api = supertest(app);
 // Get predefined test users from usersHelper
 const { TEST_PATIENT1, TEST_PATIENT2 } = usersHelper.testPatients;
 const { TEST_DOCTOR1 } = usersHelper.testDoctors;
-// const nonHashedPasswrd = TEST_PATIENT1.password;
+const nonHashedPassword = TEST_PATIENT1.password;
 
 describe('OLD: REST API requests on /api/login (expects test users to be added)', () => {
   beforeAll(async () => {
@@ -58,7 +58,7 @@ describe('OLD: REST API requests on /api/login (expects test users to be added)'
   });
 });
 
-/* describe('JWT Token: REST API requests on /api/login (expects test users to be added)', () => {
+describe('JWT Token: REST API requests on /api/login (expects test users to be added)', () => {
   beforeAll(async () => {
     // Clean the test database first
     await User.deleteMany({});
@@ -80,8 +80,9 @@ describe('OLD: REST API requests on /api/login (expects test users to be added)'
       .expect('Content-Type', /application\/json/);
 
     const { body } = result;
+    const userId = await usersHelper.getUserId(TEST_PATIENT1);
 
-    const claim = { email: TEST_PATIENT1.email, role: TEST_PATIENT1.role };
+    const claim = { id: userId };
     const jtoken = jwt.sign(claim, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '2h' });
 
     // Checking the response body
@@ -104,7 +105,7 @@ describe('OLD: REST API requests on /api/login (expects test users to be added)'
     const { body } = result;
     expect(body.message).toContain('Invalid Username or Password');
   });
-}); */
+});
 
 // Close mongoose connection from supertest(app)
 afterAll(() => {

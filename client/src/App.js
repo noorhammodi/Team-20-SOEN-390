@@ -6,9 +6,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import LoginScreen from './views/LoginScreen';
 import RegisterScreen from './views/RegisterScreen';
-import Dashboard from './views/Dashboard';
 import DailyCheckIn from './views/DailyCheckIn';
 import ListUsers from './views/ListUsers';
+import HistorySymptoms from './views/HistorySymptoms';
+import Dashboard from './views/Dashboard';
 
 // React-Native (will be deleted)
 const styles = StyleSheet.create({
@@ -44,6 +45,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/checkIn" element={<DailyCheckIn />} />
             <Route path="/listUsers" element={<ListUsers />} />
+            <Route path="/historySymptoms" element={<HistorySymptoms />} />
           </Routes>
         </Router>
         <StatusBar style="auto" />

@@ -40,7 +40,7 @@ function LoginScreen() {
       if (response.data.auth) {
         setIsError(false);
         localStorage.setItem('token', `Bearer ${response.data.token}`);
-        navigate('/dashboard', { state: { name: response.data.profile.firstName, role: response.data.profile.role } });
+        navigate('/dashboard', { state: { name: response.data.profile.firstName, role: response.data.profile.role, hin: response.data.profile.hin } });
       } else {
         setIsError(true);
         setMessage(response.data.message);

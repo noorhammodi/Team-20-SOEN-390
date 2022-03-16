@@ -25,17 +25,34 @@ import Navbar from '../components/Navbar';
 
 const getInitialNameState = () => {
   if (useLocation().state !== null) {
-    return { name: useLocation().state.name, role: useLocation().state.role };
+    return {
+      name: useLocation().state.name,
+      role: useLocation().state.role,
+    };
   }
   return { name: 'N/A', role: 'N/A' };
 };
+const getInitialHINState = () => {
+  if (useLocation().state !== null) {
+    return {
+      hin: useLocation().state.hin,
+    };
+  }
+  return { hin: '0' };
+};
+
 function DashboardContent() {
+  const { hin } = getInitialHINState();
+  const sendHIN = hin;
   const navigate = useNavigate();
   const goCheckIn = () => {
-    navigate('/checkIn');
+    navigate('/checkIn', { state: { hin: sendHIN } });
   };
   const goListUsers = () => {
     navigate('/listUsers');
+  };
+  const goHistorySymptoms = () => {
+    navigate('/historySymptoms', { state: { hin: sendHIN } });
   };
   const primary = blue;
   const { name } = getInitialNameState();
@@ -93,9 +110,13 @@ function DashboardContent() {
                   <br />
                   <br />
                   <br />
+                  <Button variant="contained" style={{ bottom: 3, left: 0, color: '#00296B' }} onClick={goHistorySymptoms}>
+                    <Typography style={{ color: '#FFFFFF' }}>History </Typography>
+                    <NavigateNextIcon style={{ color: '#FFFFFF' }} />
+                  </Button>
 
-                  <Button variant="contained" style={{ bottom: 3, left: 200, color: '#00296B' }} onClick={goCheckIn}>
-                    <Typography style={{ color: '#FFFFFF' }}>Next </Typography>
+                  <Button variant="contained" style={{ bottom: 3, left: 125, color: '#00296B' }} onClick={goCheckIn}>
+                    <Typography style={{ color: '#FFFFFF' }}>Submit </Typography>
                     <NavigateNextIcon style={{ color: '#FFFFFF' }} />
                   </Button>
                 </Item>

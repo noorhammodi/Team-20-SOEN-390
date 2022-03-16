@@ -14,6 +14,7 @@ const oldapiRouter = require('./controllers/oldapi');
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login');
 const formsRouter = require('./controllers/formsRouter');
+const conversationsRouter = require('./controllers/conversationsRouter');
 
 // Static routes
 const healthRouter = require('./static_routes/healthcheck');
@@ -49,6 +50,7 @@ app.use('/rest/api', oldapiRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/forms', formsRouter);
+app.use('/api/conversations', conversationsRouter);
 
 // Health Checker
 app.use('/health', healthRouter);

@@ -60,7 +60,6 @@ function DailyCheckIn() {
       soreThroatWithoutObviousCause,
       hin,
     };
-
     if (!feverOrChills) {
       payload = {
         feverOrChills,

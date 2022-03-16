@@ -29,6 +29,7 @@ const getInitialNameState = () => {
   }
   return { name: 'N/A', role: 'N/A' };
 };
+
 function DashboardContent() {
   const navigate = useNavigate();
   const goCheckIn = () => {
@@ -36,6 +37,7 @@ function DashboardContent() {
   };
   const goListUsers = () => {
     navigate('/listUsers');
+  };
   const goHistorySymptoms = () => {
     navigate('/historySymptoms');
   };

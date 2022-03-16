@@ -3,7 +3,6 @@ import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { StyleSheet, View } from 'react-native';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import LoginScreen from './views/LoginScreen';
 import RegisterScreen from './views/RegisterScreen';
 import Dashboard from './views/Dashboard';
@@ -29,6 +28,7 @@ const theme = createTheme({
       main: '#FDC500',
     },
   },
+
 });
 
 function App() {

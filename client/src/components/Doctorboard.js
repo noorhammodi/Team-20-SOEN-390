@@ -1,21 +1,12 @@
 import * as React from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-// import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
-import Container from '@mui/material/Container';
+import {
+  Grid, Divider, Container, Typography, Button, Table, TableBody, TableCell,
+  TableContainer, TableHead,
+  TableRow, Paper,
+} from '@mui/material/';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { blue } from '@mui/material/colors';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 
 function createData(name, age, sex, weight, lastappointment) {
   return {

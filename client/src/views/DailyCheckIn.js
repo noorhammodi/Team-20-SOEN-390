@@ -10,6 +10,7 @@ import {
   TextField,
 } from '@mui/material';
 import checkInService from '../services/checkIn';
+import Navbar from '../components/Navbar';
 
 function DailyCheckIn() {
   const navigate = useNavigate();
@@ -69,6 +70,11 @@ function DailyCheckIn() {
 
   return (
     <>
+      <Navbar />
+      <br />
+      <br />
+      <br />
+      <br />
       <List>
         <ListItem>
           <ListItemText primary="Do you have any of the following signs or symptoms (new or worsening)? Symptoms should not be chromic or related to other known causes or conditions." />

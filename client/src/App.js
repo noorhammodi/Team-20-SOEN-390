@@ -8,6 +8,7 @@ import LoginScreen from './views/LoginScreen';
 import RegisterScreen from './views/RegisterScreen';
 import Dashboard from './views/Dashboard';
 import DailyCheckIn from './views/DailyCheckIn';
+import HistorySymptoms from './views/HistorySymptoms';
 
 // React-Native (will be deleted)
 const styles = StyleSheet.create({
@@ -42,6 +43,7 @@ function App() {
             <Route path="/register" element={<RegisterScreen />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/checkIn" element={<DailyCheckIn />} />
+            <Route path="/historySymptoms" element={<HistorySymptoms />} />
           </Routes>
         </Router>
         <StatusBar style="auto" />

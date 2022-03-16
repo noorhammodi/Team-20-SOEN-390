@@ -17,6 +17,7 @@ function ListUsers() {
     getUsers();
   }, []);
 
+
   async function getUsers() {
     await adminService.getAll().then((response) => {
       setData(response.data);
@@ -31,7 +32,12 @@ function ListUsers() {
   };
 
   const userRows = [];
+
+  let counter = 0;
+
   for (let item of data) {
+    const buttonName = `delete-button-${counter}`;
+    
     const row = (
       <tr key={item._id}>
         <td key={1}>{ item._id }</td>
@@ -39,9 +45,10 @@ function ListUsers() {
         <td key={3}>{ item.email }</td>
         <td key={4}>{ item.role }</td>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <button onClick={() => handleDeleteUser(item._id)}>Delete</button>
+        <button name={ buttonName } onClick={() => handleDeleteUser(item._id)}>Delete</button>
       </tr>
     );
+    counter++;
     userRows.push(row);
   }
 

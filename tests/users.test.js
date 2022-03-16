@@ -12,7 +12,7 @@ const { TEST_PATIENT1, TEST_PATIENT2 } = usersHelper.testPatients;
 const { TEST_DOCTOR1 } = usersHelper.testDoctors;
 
 describe('REST API requests on /api/users/ (expects test users to be added)', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     // Clean the test database first
     await User.deleteMany({});
     TEST_PATIENT1.password = await bcrypt.hash(TEST_PATIENT1.password, 10);

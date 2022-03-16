@@ -7,14 +7,14 @@ const config = require('../utils/config');
 
 // Gets a list of users (does not work in prod)
 usersRouter.get('/', async (request, response) => {
-  if (config.env.isDev() || config.env.isTest()) {
-    const users = await User.find();
-    response.json(users);
-  } else {
-    response.status(401).json({
-      error: 'Unauthorized operation',
-    });
-  }
+  // if (config.env.isDev() || config.env.isTest()) {
+  const users = await User.find();
+  response.json(users);
+  // } else {
+  //   response.status(401).json({
+  //     error: 'Unauthorized operation',
+  //   });
+  // }
 });
 
 // Register a new user

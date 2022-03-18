@@ -38,9 +38,19 @@ function LoginScreen() {
       // Get response from axios
       const response = await loginService.login(payload);
       if (response.data.auth) {
+
         setIsError(false);
+
         localStorage.setItem('token', `Bearer ${response.data.token}`);
+        
+        if(response.data.profile.role ==="doctor"){
+
+        navigate('/doctordashboard', { state: { name: response.data.profile.firstName, role: response.data.profile.role, hin: response.data.profile.hin } });
+
+        }
+        else if(response.data.profile.role==="patient"){
         navigate('/dashboard', { state: { name: response.data.profile.firstName, role: response.data.profile.role, hin: response.data.profile.hin } });
+      }
       } else {
         setIsError(true);
         setMessage(response.data.message);

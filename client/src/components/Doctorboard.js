@@ -16,10 +16,7 @@ function createData(name, age, sex, weight, lastappointment) {
 
 const rows = [
   createData('John Smith', 5, 6.0, 24, 4.0),
-  createData('Sarah Bo', 237, 9.0, 37, 4.3),
-  createData('Lori Lo', 262, 16.0, 24, 6.0),
-  createData('Mohammed Mo', 305, 3.7, 67, 4.3),
-  createData('Ginger Bread', 356, 16.0, 49, 3.9),
+  
 ];
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -31,8 +28,18 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 const primary = blue;
 
-function Doctorboard() {
+function Doctorboard(props) {
+  
+  console.log(props)
+
+
+
+
+
+
+
   return (
+    
     <Container maxWidth="lg">
       <Grid container rowSpacing={6} columnSpacing={{ xs: 1, sm: 2, md: 6 }}>
         <Grid item xs={8}>

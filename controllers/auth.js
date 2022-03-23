@@ -2,7 +2,9 @@ const authRouter = require('express').Router();
 const jwt = require('jsonwebtoken');
 
 const verifyJWTAuth = (request, response, next) => {
-  const headerToken = request.headers['x-access-token'];
+  console.log(request);
+  const headerToken = request.headers.authorization;
+  console.log(`${headerToken}`);
   if (headerToken == null) {
     // No token: 401
     response.status(401).json({ auth: false, message: 'No token found in request' });

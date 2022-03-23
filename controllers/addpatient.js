@@ -20,6 +20,7 @@ addPatientRouter.post('/', TokenVerify, async (req) => {
 
   patientslist.push(patientEmail);
 
+  console.log(patientslist);
   doc.updateOne(
     { email: doctorEmail },
     { patients: patientslist },

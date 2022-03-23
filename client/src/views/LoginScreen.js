@@ -19,6 +19,7 @@ import PasswordIcon from '@mui/icons-material/Password';
 import CreateIcon from '@mui/icons-material/Create';
 
 import loginService from '../services/login';
+import doctorLogin from '../services/doctorLogin';
 import Logo from '../components/Logo';
 
 function LoginScreen() {
@@ -44,8 +45,11 @@ function LoginScreen() {
         localStorage.setItem('token', `Bearer ${response.data.token}`);
         
         if(response.data.profile.role ==="doctor"){
-
-        navigate('/doctordashboard', { state: { name: response.data.profile.firstName, role: response.data.profile.role, hin: response.data.profile.hin } });
+        
+          const patientsl= await doctorLogin.login({"email":"kem"});
+          const yu= JSON.stringify(patientsl.data)
+        
+        navigate('/doctordashboard', { state: { name:response.data.profile.role, role: response.data.profile.role, hin: response.data.profile.hin, patients: yu} });
 
         }
         else if(response.data.profile.role==="patient"){

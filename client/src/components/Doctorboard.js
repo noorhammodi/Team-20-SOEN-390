@@ -12,7 +12,7 @@ import { blue } from '@mui/material/colors';
 function createData(element){
 
 
- var temp= {name: element.firstName+" "+element.lastName, age:' ',sex:' ',weight:' ', lastappointment:' '}
+ var temp= {name: element.firstName+"  "+element.lastName, age:' ',sex:' ',weight:' ', lastappointment:' '}
   
 
 return temp

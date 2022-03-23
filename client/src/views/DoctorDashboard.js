@@ -19,8 +19,8 @@ const getInitialNameState = () => {
 function DashboardContent() {
   const { name } = getInitialNameState();
   const welcomeMessage = `Hello, ${name}`;
-  const { patients} = getInitialNameState();
-  const patientslist= `${patients}`;
+  const {patients} = getInitialNameState();
+  
   // const { role } = getInitialNameState();
   // const greeting = `Nice to see you back, ${role}`;
 
@@ -57,7 +57,7 @@ function DashboardContent() {
             </Stack>
 
           </Box>
-          <Patientboard listOfPatients={patientslist}/>
+          <Patientboard listOfPatients={patients}/>
         </Box>
       </Box>
     </ThemeProvider>

@@ -8,16 +8,26 @@ import {
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { blue } from '@mui/material/colors';
 
-function createData(name, age, sex, weight, lastappointment) {
-  return {
-    name, age, sex, weight, lastappointment,
-  };
+
+function createData(element){
+
+
+ var temp= {name: element.firstName+" "+element.lastName, age:' ',sex:' ',weight:' ', lastappointment:' '}
+  
+
+return temp
 }
 
-const rows = [
-  createData('John Smith', 5, 6.0, 24, 4.0),
+// function createData(name, age, sex, weight, lastappointment) {
+//   return {
+//     name, age, sex, weight, lastappointment,
+//   };
+// }
+
+// const rows = [
+//   createData('John Smith', 5, 6.0, 24, 4.0),
   
-];
+// ];
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -29,10 +39,10 @@ const Item = styled(Paper)(({ theme }) => ({
 const primary = blue;
 
 function Doctorboard(props) {
-  
-  console.log(props)
 
 
+
+  const rows = props.listOfPatients.map((element) => createData(element));
 
 
 

@@ -47,9 +47,9 @@ function LoginScreen() {
         if(response.data.profile.role ==="doctor"){
         
           const patientsl= await doctorLogin.login({"email":"kem"});
-          const yu= JSON.stringify(patientsl.data)
+          
         
-        navigate('/doctordashboard', { state: { name:response.data.profile.role, role: response.data.profile.role, hin: response.data.profile.hin, patients: yu} });
+        navigate('/doctordashboard', { state: { name:response.data.profile.role, role: response.data.profile.role, hin: response.data.profile.hin, patients: patientsl.data } });
 
         }
         else if(response.data.profile.role==="patient"){

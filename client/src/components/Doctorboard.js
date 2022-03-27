@@ -8,16 +8,13 @@ import {
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { blue } from '@mui/material/colors';
 
-
-function createData(element){
-
-
- var temp= {name: element.firstName+"  "+element.lastName, age:' ',sex:' ',weight:' ', lastappointment:' '}
-  
-
-return temp
+function createData(element) {
+  const temp = {
+    name: `${element.firstName} ${element.lastName}`, age: ' ', sex: ' ', weight: ' ', lastappointment: ' ',
+  };
+  return temp;
 }
-
+/*  eslint-disable  react/destructuring-assignment */
 // function createData(name, age, sex, weight, lastappointment) {
 //   return {
 //     name, age, sex, weight, lastappointment,
@@ -26,7 +23,6 @@ return temp
 
 // const rows = [
 //   createData('John Smith', 5, 6.0, 24, 4.0),
-  
 // ];
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -39,17 +35,8 @@ const Item = styled(Paper)(({ theme }) => ({
 const primary = blue;
 
 function Doctorboard(props) {
-
-
-
   const rows = props.listOfPatients.map((element) => createData(element));
-
-
-
-
-
   return (
-    
     <Container maxWidth="lg">
       <Grid container rowSpacing={6} columnSpacing={{ xs: 1, sm: 2, md: 6 }}>
         <Grid item xs={8}>
@@ -129,7 +116,6 @@ function Doctorboard(props) {
         </Grid>
       </Grid>
     </Container>
-
   );
 }
 export default Doctorboard;

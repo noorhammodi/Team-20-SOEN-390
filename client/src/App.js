@@ -46,7 +46,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/checkIn" element={<DailyCheckIn />} />
             <Route path="/listUsers" element={<ListUsers />} />
-            <Route path="/doctorDashboard" element={<DoctorDashboard/>} />
+            <Route path="/doctorDashboard" element={<DoctorDashboard />} />
             <Route path="/historySymptoms" element={<HistorySymptoms />} />
           </Routes>
         </Router>

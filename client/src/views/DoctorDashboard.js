@@ -11,7 +11,11 @@ import user1 from '../components/images/user1.jpg';
 
 const getInitialNameState = () => {
   if (useLocation().state !== null) {
-    return { name: useLocation().state.name, role: useLocation().state.role, patients: useLocation().state.patients };
+    return {
+      name: useLocation().state.name,
+      role: useLocation().state.role,
+      patients: useLocation().state.patients,
+    };
   }
   return { name: 'N/A', role: 'N/A' };
 };
@@ -19,8 +23,7 @@ const getInitialNameState = () => {
 function DashboardContent() {
   const { name } = getInitialNameState();
   const welcomeMessage = `Hello, ${name}`;
-  const {patients} = getInitialNameState();
-  
+  const { patients } = getInitialNameState();
   // const { role } = getInitialNameState();
   // const greeting = `Nice to see you back, ${role}`;
 
@@ -57,7 +60,7 @@ function DashboardContent() {
             </Stack>
 
           </Box>
-          <Patientboard listOfPatients={patients}/>
+          <Patientboard listOfPatients={patients} />
         </Box>
       </Box>
     </ThemeProvider>

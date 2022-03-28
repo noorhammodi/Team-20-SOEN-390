@@ -52,7 +52,7 @@ describe('Test Admin Page', () => {
     cy.get('button[name="login-button"]').click();
 
     // On the admin dashboard
+    
     cy.get('button[name="delete-button-0"]').click();
-
   });
 });

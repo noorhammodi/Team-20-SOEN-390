@@ -51,8 +51,6 @@ describe('Test Admin Page', () => {
 
     cy.get('button[name="login-button"]').click();
 
-    cy.get('button[name="admin-button"]').click({ force: true });
-
     // On the admin dashboard
     cy.contains(TEST_PATIENT1.firstName);
     cy.get('button[name="delete-button-0"]').click();

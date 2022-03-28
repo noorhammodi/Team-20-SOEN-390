@@ -51,8 +51,6 @@ describe('Test Admin Page', () => {
 
     cy.get('button[name="login-button"]').click();
 
-    cy.contains('See Users');
-
     cy.get('button[name="admin-button"]').click({ force: true });
 
     // On the admin dashboard

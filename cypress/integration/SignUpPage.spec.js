@@ -22,7 +22,7 @@ describe('Test SignUp page', () => {
     cy.contains('JeVaisBienAller');
     cy.contains('ROLE');
     cy.contains('Patient').click();
-    cy.contains('Doctor')
+    cy.contains('Doctor');
     cy.contains('BACK');
     cy.contains('NEXT');
 

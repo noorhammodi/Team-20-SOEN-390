@@ -51,7 +51,6 @@ describe('Test Admin Page', () => {
 
     cy.get('button[name="login-button"]').click();
 
-    cy.contains(TEST_ADMIN1.firstName);
     cy.contains('See Users');
 
     cy.get('button[name="admin-button"]').click({ force: true });

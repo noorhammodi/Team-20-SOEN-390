@@ -53,6 +53,5 @@ describe('Test Admin Page', () => {
 
     // On the admin dashboard
 
-    cy.get('button[name="delete-button-0"]').click();
   });
 });
